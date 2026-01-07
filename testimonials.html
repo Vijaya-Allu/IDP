@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonials | EduGlobe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    .top-header {
+      background: #1a237e;
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .contact-info span {
+      margin-right: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #90caf9;
+      transform: translateY(-2px);
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: #3949ab;
+      margin-right: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .logo h1 {
+      font-size: 28px;
+      color: #1a237e;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #5c6bc0;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #3949ab;
+    }
+
+    nav a.active {
+      color: #3949ab;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: #3949ab;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .search-box input {
+      padding: 10px 15px 10px 45px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      width: 250px;
+      outline: none;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      border-color: #3949ab;
+      box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.1);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      transition: color 0.3s ease;
+    }
+
+    .search-box input:focus + i {
+      color: #3949ab;
+    }
+
+    .logout-btn {
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(135deg, #d32f2f, #b71c1c);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0, #7986cb);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: bottom;
+      opacity: 0.3;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 22px;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.95;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+
+    /* Testimonials Section - Matching Index Page Style */
+    .testimonials-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f1f3f9, #e8eaf6);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      color: #1a237e;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #3949ab, #5c6bc0);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 700px;
+      margin: 20px auto 0;
+      font-size: 18px;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 50px;
+    }
+
+    .filter-btn {
+      background: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .filter-btn:hover::before {
+      width: 100%;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      box-shadow: 0 6px 15px rgba(57, 73, 171, 0.3);
+    }
+
+    .filter-btn:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(57, 73, 171, 0.3);
+    }
+
+    /* Testimonials Grid - Horizontal Layout */
+    .testimonials-grid {
+      display: flex;
+      overflow-x: auto;
+      gap: 30px;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #3949ab #e0e0e0;
+    }
+
+    .testimonials-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .testimonials-grid::-webkit-scrollbar-track {
+      background: #e0e0e0;
+      border-radius: 10px;
+    }
+
+    .testimonials-grid::-webkit-scrollbar-thumb {
+      background: #3949ab;
+      border-radius: 10px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      min-width: 350px;
+      max-width: 400px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .testimonial-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #3949ab, #5c6bc0);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .testimonial-card:hover::after {
+      transform: translateY(0);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 25px;
+      font-size: 60px;
+      color: rgba(57, 73, 171, 0.1);
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-content {
+      margin-bottom: 25px;
+      font-style: italic;
+      color: #555;
+      font-size: 17px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      min-height: 120px;
+    }
+
+    .testimonial-rating {
+      margin-bottom: 25px;
+      color: #ffc107;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+      border: 3px solid #f1f3f9;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover .author-img {
+      transform: scale(1.1);
+      border-color: #3949ab;
+    }
+
+    .author-info {
+      text-align: left;
+    }
+
+    .author-info h4 {
+      margin-bottom: 5px;
+      color: #333;
+      font-size: 18px;
+    }
+
+    .author-info p {
+      font-size: 15px;
+      color: #666;
+    }
+
+    .testimonial-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(57, 73, 171, 0.1);
+      color: #3949ab;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: bottom;
+    }
+
+    .stats-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .stats-title h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .stats-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #5c6bc0, #7986cb);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+      flex: 1;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .stat-label {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 0;
+      background: white;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 42px;
+      color: #1a237e;
+      margin-bottom: 20px;
+    }
+
+    .cta-content p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      box-shadow: 0 4px 15px rgba(57, 73, 171, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(57, 73, 171, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #3949ab;
+      border: 2px solid #3949ab;
+    }
+
+    .btn-secondary:hover {
+      background: #3949ab;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background: #263238;
+      color: white;
+      padding: 80px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h3 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background: #3949ab;
+      border-radius: 2px;
+    }
+
+    .footer-col p {
+      margin-bottom: 25px;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 15px;
+    }
+
+    .footer-col ul li a {
+      color: #b0bec5;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-col ul li a:hover {
+      color: #3949ab;
+      transform: translateX(5px);
+    }
+
+    .newsletter {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .newsletter input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .newsletter button {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .newsletter button:hover {
+      background: linear-gradient(135deg, #303f9f, #3949ab);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid #37474f;
+      font-size: 15px;
+      opacity: 0.7;
+    }
+
+    /* Floating Action Button */
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 5px 15px rgba(57, 73, 171, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(57, 73, 171, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .header-container {
+        flex-direction: column;
+      }
+      
+      .logo {
+        margin-bottom: 25px;
+      }
+      
+      nav {
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .search-box {
+        margin-right: 0;
+        margin-bottom: 25px;
+        width: 100%;
+      }
+      
+      .search-box input {
+        width: 100%;
+      }
+      
+      .hero h2 {
+        font-size: 38px;
+      }
+      
+      .hero p {
+        font-size: 20px;
+      }
+      
+      .testimonial-card {
+        min-width: 300px;
+      }
+      
+      .stats-grid {
+        gap: 20px;
+      }
+      
+      .stat-card {
+        min-width: 200px;
+        padding: 25px 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 32px;
+      }
+      
+      .hero p {
+        font-size: 18px;
+      }
+      
+      .section-title h2 {
+        font-size: 36px;
+      }
+      
+      .stats-title h2 {
+        font-size: 36px;
+      }
+      
+      .filter-section {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      
+      .filter-section::-webkit-scrollbar {
+        height: 6px;
+      }
+      
+      .filter-section::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      
+      .filter-section::-webkit-scrollbar-thumb {
+        background: #3949ab;
+        border-radius: 10px;
+      }
+      
+      .testimonial-card {
+        min-width: 280px;
+        padding: 25px 20px;
+      }
+      
+      .stats-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .stat-card {
+        max-width: 100%;
+        width: 100%;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .newsletter {
+        flex-direction: column;
+      }
+      
+      .newsletter input {
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      
+      .newsletter button {
+        border-radius: 5px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Authentication Script -->
+  <script>
+    // Redirect to login page if not logged in
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function logoutUser() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+
+
+
+  <!-- Main Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <i class="fas fa-globe-americas"></i>
+        <h1>Edu<span>Globe</span></h1>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="topics.html">Topics</a>
+        <a href="testimonials.html" class="active">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="user-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search topics...">
+        </div>
+        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h2>Student Testimonials</h2>
+      <p>Discover how EduGlobe has transformed the learning journey for thousands of students worldwide</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Our Students Say</h2>
+        <p>Real stories from real students who have achieved their learning goals with EduGlobe</p>
+      </div>
+      
+      <div class="filter-section">
+        <button class="filter-btn active" data-filter="all">All Subjects</button>
+        <button class="filter-btn" data-filter="math">Mathematics</button>
+        <button class="filter-btn" data-filter="programming">Programming</button>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-category="math">
+          <div class="testimonial-tag">Mathematics</div>
+          <div class="testimonial-content">
+            "EduGlobe helped me ace my math exams! The interactive lessons and practice quizzes made complex concepts easy to understand."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ananya Sharma" class="author-img">
+            <div class="author-info">
+              <h4>Ananya Sharma</h4>
+              <p>B.Tech Student</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-category="programming">
+          <div class="testimonial-tag">Programming</div>
+          <div class="testimonial-content">
+            "The quizzes are fun and interactive. Highly recommended! The coding challenges helped me land my dream job at a top tech company."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Verma" class="author-img">
+            <div class="author-info">
+              <h4>Rahul Verma</h4>
+              <p>Software Engineer</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-category="math">
+          <div class="testimonial-tag">Mathematics</div>
+          <div class="testimonial-content">
+            "EduGlobe's calculus course saved my semester! The step-by-step problem solving approach made derivatives and integrals finally make sense."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Amit Kumar" class="author-img">
+            <div class="author-info">
+              <h4>Amit Kumar</h4>
+              <p>Mathematics Student</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-category="programming">
+          <div class="testimonial-tag">Programming</div>
+          <div class="testimonial-content">
+            "I went from knowing nothing about programming to building my own apps in just 6 months. EduGlobe's structured approach is amazing!"
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Sneha Reddy" class="author-img">
+            <div class="author-info">
+              <h4>Sneha Reddy</h4>
+              <p>Full Stack Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-title">
+        <h2>Our Impact</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Active Students</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Satisfaction Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Courses Available</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4.8/5</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Join Our Learning Community Today</h2>
+        <p>Start your educational journey with EduGlobe and unlock your full potential</p>
+        <div class="btn-group">
+          <a href="topics.html" class="btn btn-primary">Get Started</a>
+          <a href="about.html" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>About EduGlobe</h3>
+          <p>EduGlobe is a comprehensive online learning platform dedicated to providing high-quality education in Mathematics and Programming.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="topics.html">Topics</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Popular Topics</h3>
+          <ul>
+            <li><a href="#">Calculus</a></li>
+            <li><a href="#">Python Programming</a></li>
+            <li><a href="#">Algebra</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Data Structures</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter for the latest updates and learning resources.</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Your email address">
+            <button type="submit">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 EduGlobe. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Action Button -->
+  <div class="fab">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // Add active class to navigation link
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentLocation = location.href;
+      const menuItem = document.querySelectorAll('nav a');
+      const menuLength = menuItem.length;
+      
+      for (let i = 0; i < menuLength; i++) {
+        if(menuItem[i].href === currentLocation) {
+          menuItem[i].classList.add('active');
+        }
+      }
+      
+      // Testimonial filter functionality
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+          
+          const filterValue = button.getAttribute('data-filter');
+          
+          testimonialCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Newsletter form
+      const newsletterForm = document.querySelector('.newsletter');
+      const newsletterInput = newsletterForm.querySelector('input');
+      const newsletterButton = newsletterForm.querySelector('button');
+      
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (newsletterInput.value.trim() !== '') {
+          // Show success message
+          const originalText = newsletterButton.textContent;
+          newsletterButton.textContent = 'Subscribed!';
+          newsletterButton.style.background = 'linear-gradient(135deg, #4caf50, #388e3c)';
+          
+          // Reset after 3 seconds
+          setTimeout(() => {
+            newsletterButton.textContent = originalText;
+            newsletterButton.style.background = '';
+            newsletterInput.value = '';
+          }, 3000);
+        }
+      });
+      
+      // Floating action button functionality
+      const fab = document.querySelector('.fab');
+      fab.addEventListener('click', () => {
+        // Scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

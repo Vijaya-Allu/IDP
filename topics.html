@@ -1,0 +1,4322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics | EduGlobe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    .top-header {
+      background: #1a237e;
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .contact-info span {
+      margin-right: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #90caf9;
+      transform: translateY(-2px);
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: #3949ab;
+      margin-right: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .logo h1 {
+      font-size: 28px;
+      color: #1a237e;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #5c6bc0;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #3949ab;
+    }
+
+    nav a.active {
+      color: #3949ab;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: #3949ab;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .search-box input {
+      padding: 10px 15px 10px 45px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      width: 250px;
+      outline: none;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .search-box input:focus {
+      border-color: #3949ab;
+      box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.1);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .search-box input:focus + i {
+      color: #3949ab;
+    }
+
+    .logout-btn {
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(135deg, #d32f2f, #b71c1c);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0, #7986cb);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: bottom;
+      opacity: 0.3;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 22px;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.95;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+
+    /* Topics Section - Matching Index Page Style */
+    .topics-section {
+      background: linear-gradient(135deg, #f1f3f9, #e8eaf6);
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      color: #1a237e;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #3949ab, #5c6bc0);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 700px;
+      margin: 20px auto 0;
+      font-size: 18px;
+    }
+
+    .topics-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .topic-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tab-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .tab-btn:hover::before {
+      width: 100%;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      box-shadow: 0 6px 15px rgba(57, 73, 171, 0.3);
+    }
+
+    .tab-btn:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(57, 73, 171, 0.3);
+    }
+
+    .topics-content {
+      display: flex;
+      overflow-x: auto;
+      gap: 30px;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #3949ab #e0e0e0;
+    }
+
+    .topics-content::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .topics-content::-webkit-scrollbar-track {
+      background: #e0e0e0;
+      border-radius: 10px;
+    }
+
+    .topics-content::-webkit-scrollbar-thumb {
+      background: #3949ab;
+      border-radius: 10px;
+    }
+
+    .topic-item {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      min-width: 280px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .topic-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #3949ab, #5c6bc0);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .topic-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .topic-item:hover::after {
+      transform: translateY(0);
+    }
+
+    .topic-item.completed {
+      background: #e8f5e9;
+    }
+
+    .topic-item.completed::after {
+      background: linear-gradient(90deg, #43a047, #66bb6a);
+    }
+
+    .topic-item i {
+      font-size: 50px;
+      color: #3949ab;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .topic-item:hover i {
+      transform: scale(1.2);
+      color: #5c6bc0;
+    }
+
+    .topic-item.completed i {
+      color: #43a047;
+    }
+
+    .topic-item h3 {
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .topic-item p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 20px;
+      min-height: 60px;
+    }
+
+    .topic-item a {
+      color: #3949ab;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .topic-item a i {
+      font-size: 16px;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .topic-item:hover a i {
+      transform: translateX(5px);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Tools Section */
+    .tools-section {
+      padding: 60px 0;
+      background: white;
+      text-align: center;
+    }
+
+    .tools-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tool-btn {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(57, 73, 171, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(57, 73, 171, 0.4);
+    }
+
+    /* Calculator Styles */
+    .calculator-container {
+      display: none;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    .calculator-container.active {
+      display: block;
+    }
+
+    .calculator-display {
+      width: 100%;
+      padding: 15px;
+      font-size: 24px;
+      text-align: right;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .calculator-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .calc-btn {
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #f5f7ff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .calc-btn:hover {
+      background: #e8eaf6;
+    }
+
+    .calc-btn.operator {
+      background: #3949ab;
+      color: white;
+    }
+
+    .calc-btn.operator:hover {
+      background: #303f9f;
+    }
+
+    .calc-btn.equals {
+      background: #43a047;
+      color: white;
+    }
+
+    .calc-btn.equals:hover {
+      background: #2e7d32;
+    }
+
+    .calc-btn.clear {
+      background: #f44336;
+      color: white;
+    }
+
+    .calc-btn.clear:hover {
+      background: #d32f2f;
+    }
+
+    /* Quiz Section - Updated */
+    .quiz-container {
+      display: none;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .quiz-container.active {
+      display: block;
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .quiz-header h3 {
+      font-size: 28px;
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+
+    .quiz-header p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .quiz-progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .quiz-progress::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+      z-index: 1;
+    }
+
+    .quiz-progress-bar {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3949ab, #5c6bc0);
+      border-radius: 2px;
+      z-index: 2;
+      transition: width 0.3s ease;
+    }
+
+    .quiz-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      color: #999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .step.active .step-circle {
+      background-color: #3949ab;
+      color: white;
+      box-shadow: 0 0 0 4px rgba(57, 73, 171, 0.2);
+    }
+
+    .step.completed .step-circle {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .step-label {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      max-width: 100px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+    }
+
+    .question h4 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      padding: 15px;
+      background: #f5f7ff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .option:hover {
+      background: #e8eaf6;
+    }
+
+    .option.selected {
+      border-color: #3949ab;
+      background: #e8eaf6;
+    }
+
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .quiz-nav-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-nav-btn.prev {
+      background: #f5f7ff;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .quiz-nav-btn.prev:hover {
+      background: #e8eaf6;
+    }
+
+    .quiz-nav-btn.next {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+    }
+
+    .quiz-nav-btn.next:hover {
+      background: linear-gradient(135deg, #303f9f, #3949ab);
+    }
+
+    .quiz-nav-btn.finish {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+    }
+
+    .quiz-nav-btn.finish:hover {
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+    }
+
+    .quiz-result {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .quiz-result.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .quiz-result.incorrect {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    /* Quiz Results Section */
+    .quiz-results {
+      display: none;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .quiz-results.active {
+      display: block;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .results-header h3 {
+      font-size: 28px;
+      color: #1a237e;
+      margin-bottom: 10px;
+    }
+
+    .score-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(57, 73, 171, 0.3);
+    }
+
+    .score-details {
+      margin-left: 30px;
+    }
+
+    .score-details p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .score-details .correct {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .score-details .incorrect {
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    .results-questions {
+      margin-top: 30px;
+    }
+
+    .result-question {
+      background: #f5f7ff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .result-question h4 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .result-question .user-answer {
+      margin-bottom: 10px;
+    }
+
+    .result-question .correct-answer {
+      font-weight: 600;
+      color: #2e7d32;
+    }
+
+    .result-question .wrong-answer {
+      font-weight: 600;
+      color: #c62828;
+    }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .quiz-actions button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-actions .btn-primary {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+    }
+
+    .quiz-actions .btn-primary:hover {
+      background: linear-gradient(135deg, #303f9f, #3949ab);
+    }
+
+    .quiz-actions .btn-secondary {
+      background: #f5f7ff;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .quiz-actions .btn-secondary:hover {
+      background: #e8eaf6;
+    }
+
+    /* Topic Details Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 2% auto;
+      padding: 0;
+      border-radius: 15px;
+      width: 95%;
+      max-width: 1200px;
+      position: relative;
+      animation: slideIn 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      max-height: 95vh;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px 15px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .close {
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close:hover {
+      transform: scale(1.2);
+    }
+
+    .modal-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f5f7ff;
+      padding: 20px 0;
+      overflow-y: auto;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    .sidebar h3 {
+      padding: 0 20px 10px;
+      color: #1a237e;
+      font-size: 18px;
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: #e8eaf6;
+      color: #3949ab;
+      border-left: 3px solid #3949ab;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .content-section {
+      margin-bottom: 40px;
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .content-section h3 {
+      color: #1a237e;
+      font-size: 24px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .content-section p {
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+
+    .content-section ul, .content-section ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+    }
+
+    .content-section li {
+      margin-bottom: 8px;
+    }
+
+    .code-example {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background: #e0e0e0;
+      padding: 10px 15px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .code-header .language {
+      color: #555;
+    }
+
+    .copy-btn {
+      background: #3949ab;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: #303f9f;
+    }
+
+    pre {
+      margin: 0;
+      padding: 15px;
+      overflow-x: auto;
+    }
+
+    .output {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: monospace;
+    }
+
+    .output-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #2e7d32;
+    }
+
+    .try-it {
+      background: #fff3e0;
+      border: 1px solid #ffcc80;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .try-it h4 {
+      color: #e65100;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .try-it textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      margin-bottom: 15px;
+    }
+
+    .try-it button {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .try-it button:hover {
+      background: #f57c00;
+    }
+
+    .note {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .note-title {
+      font-weight: 600;
+      color: #0d47a1;
+      margin-bottom: 5px;
+    }
+
+    .modal-footer {
+      padding: 15px 30px;
+      background: #f5f7ff;
+      border-top: 1px solid #e0e0e0;
+      border-radius: 0 0 15px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-footer button {
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-complete {
+      background: linear-gradient(135deg, #43a047, #66bb6a);
+      color: white;
+      box-shadow: 0 4px 10px rgba(67, 160, 71, 0.2);
+    }
+
+    .btn-complete:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(67, 160, 71, 0.3);
+    }
+
+    .btn-close {
+      background: #f5f7ff;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .btn-close:hover {
+      background: #e8eaf6;
+    }
+
+    .quiz-section {
+      background: #f5f7ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .quiz-section h4 {
+      color: #1a237e;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .quiz-question {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option {
+      padding: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-option:hover {
+      background: #e8eaf6;
+    }
+
+    .quiz-option.selected {
+      background: #3949ab;
+      color: white;
+    }
+
+    .quiz-result {
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .quiz-result.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+      display: block;
+    }
+
+    .quiz-result.incorrect {
+      background: #ffebee;
+      color: #c62828;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: #263238;
+      color: white;
+      padding: 80px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h3 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background: #3949ab;
+      border-radius: 2px;
+    }
+
+    .footer-col p {
+      margin-bottom: 25px;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 15px;
+    }
+
+    .footer-col ul li a {
+      color: #b0bec5;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-col ul li a:hover {
+      color: #3949ab;
+      transform: translateX(5px);
+    }
+
+    .newsletter {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .newsletter input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .newsletter button {
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
+      color: white;
+      border: none;
+      padding: 0 25px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .newsletter button:hover {
+      background: linear-gradient(135deg, #303f9f, #3949ab);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid #37474f;
+      font-size: 15px;
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .header-container {
+        flex-direction: column;
+      }
+      
+      .logo {
+        margin-bottom: 25px;
+      }
+      
+      nav {
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .search-box {
+        margin-right: 0;
+        margin-bottom: 25px;
+        width: 100%;
+      }
+      
+      .search-box input {
+        width: 100%;
+      }
+      
+      .hero h2 {
+        font-size: 38px;
+      }
+      
+      .hero p {
+        font-size: 20px;
+      }
+      
+      .topics-content {
+        gap: 20px;
+      }
+      
+      .topic-item {
+        min-width: 240px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 32px;
+      }
+      
+      .hero p {
+        font-size: 18px;
+      }
+      
+      .section-title h2 {
+        font-size: 36px;
+      }
+      
+      .topic-tabs {
+        justify-content: flex-start;
+        padding: 0 15px;
+      }
+      
+      .tab-btn {
+        min-width: 150px;
+      }
+      
+      .tools-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .calculator-buttons {
+        gap: 10px;
+      }
+      
+      .calc-btn {
+        padding: 15px;
+        font-size: 16px;
+      }
+      
+      .options {
+        grid-template-columns: 1fr;
+      }
+      
+      .quiz-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .newsletter {
+        flex-direction: column;
+      }
+      
+      .newsletter input {
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      
+      .newsletter button {
+        border-radius: 5px;
+        padding: 15px;
+      }
+      
+      .modal-body {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        max-height: 200px;
+      }
+      
+      .content-area {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab-btn {
+        min-width: 120px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+    
+    .no-results {
+      width: 100%;
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      margin: 20px 0;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Authentication Script -->
+  <script>
+    // Redirect to login page if not logged in
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function logoutUser() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- Main Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <i class="fas fa-globe-americas"></i>
+        <h1>Edu<span>Globe</span></h1>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="topics.html" class="active">Topics</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="user-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search topics...">
+        </div>
+        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h2>Explore Our Learning Topics</h2>
+      <p>Dive into our comprehensive collection of Mathematics and Programming topics</p>
+    </div>
+  </section>
+
+  <!-- Topics Section -->
+  <section class="topics-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Learning Topics</h2>
+        <p>Choose a category to explore our comprehensive learning materials</p>
+      </div>
+      
+      <div class="topics-container">
+        <div class="topic-tabs">
+          <button class="tab-btn active" onclick="openTab(event, 'mathematics')">
+            <i class="fas fa-calculator"></i> Mathematics
+          </button>
+          <button class="tab-btn" onclick="openTab(event, 'programming')">
+            <i class="fas fa-code"></i> Programming
+          </button>
+        </div>
+        
+        <div id="mathematics" class="tab-content active">
+          <div class="topics-content">
+            <div class="topic-item" id="math1">
+              <i class="fas fa-square-root-alt"></i>
+              <h3>Algebra</h3>
+              <p>Master equations, functions, and polynomials</p>
+              <a href="#" onclick="showTopicDetails('math1'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="math2">
+              <i class="fas fa-shapes"></i>
+              <h3>Geometry</h3>
+              <p>Explore shapes, angles, and theorems</p>
+              <a href="#" onclick="showTopicDetails('math2'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="math3">
+              <i class="fas fa-chart-line"></i>
+              <h3>Calculus</h3>
+              <p>Differentiation, integration, and applications</p>
+              <a href="#" onclick="showTopicDetails('math3'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="math4">
+              <i class="fas fa-percentage"></i>
+              <h3>Statistics</h3>
+              <p>Data analysis, probability, and distributions</p>
+              <a href="#" onclick="showTopicDetails('math4'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div id="programming" class="tab-content">
+          <div class="topics-content">
+            <div class="topic-item" id="prog1">
+              <i class="fab fa-python"></i>
+              <h3>Python</h3>
+              <p>Learn the versatile programming language</p>
+              <a href="#" onclick="showTopicDetails('prog1'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="prog2">
+              <i class="fab fa-java"></i>
+              <h3>Java</h3>
+              <p>Object-oriented programming concepts</p>
+              <a href="#" onclick="showTopicDetails('prog2'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="prog3">
+              <i class="fab fa-html5"></i>
+              <h3>Web Development</h3>
+              <p>HTML, CSS, JavaScript and frameworks</p>
+              <a href="#" onclick="showTopicDetails('prog3'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="prog4">
+              <i class="fas fa-database"></i>
+              <h3>Database</h3>
+              <p>SQL, data modeling and management</p>
+              <a href="#" onclick="showTopicDetails('prog4'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topic Details Modal -->
+  <div id="topicModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Topic Title</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="sidebar">
+          <h3>Table of Contents</h3>
+          <ul id="sidebarNav">
+            <!-- Navigation items will be inserted here -->
+          </ul>
+        </div>
+        <div class="content-area" id="contentArea">
+          <!-- Content sections will be inserted here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal()">Close</button>
+        <button class="btn-complete" onclick="completeTopic(currentTopicId)">Mark as Completed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools Section -->
+  <section class="tools-section">
+    <div class="container">
+      <div class="tools-container">
+        <button class="tool-btn" onclick="toggleCalculator()">
+          <i class="fas fa-calculator"></i> Calculator
+        </button>
+        <button class="tool-btn" onclick="generateQuiz()">
+          <i class="fas fa-question-circle"></i> GK Quiz
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <div class="calculator-container" id="calculator">
+    <input type="text" class="calculator-display" id="calc-display" readonly />
+    <div class="calculator-buttons">
+      <button class="calc-btn" onclick="appendToCalc('7')">7</button>
+      <button class="calc-btn" onclick="appendToCalc('8')">8</button>
+      <button class="calc-btn" onclick="appendToCalc('9')">9</button>
+      <button class="calc-btn operator" onclick="appendToCalc('/')">÷</button>
+      <button class="calc-btn" onclick="appendToCalc('4')">4</button>
+      <button class="calc-btn" onclick="appendToCalc('5')">5</button>
+      <button class="calc-btn" onclick="appendToCalc('6')">6</button>
+      <button class="calc-btn operator" onclick="appendToCalc('*')">×</button>
+      <button class="calc-btn" onclick="appendToCalc('1')">1</button>
+      <button class="calc-btn" onclick="appendToCalc('2')">2</button>
+      <button class="calc-btn" onclick="appendToCalc('3')">3</button>
+      <button class="calc-btn operator" onclick="appendToCalc('-')">−</button>
+      <button class="calc-btn" onclick="appendToCalc('0')">0</button>
+      <button class="calc-btn" onclick="appendToCalc('.')">.</button>
+      <button class="calc-btn equals" onclick="calculateResult()">=</button>
+      <button class="calc-btn operator" onclick="appendToCalc('+')">+</button>
+      <button class="calc-btn clear" onclick="clearCalc()">C</button>
+    </div>
+  </div>
+
+  <!-- Quiz Section - Updated -->
+  <div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+      <h3>General Knowledge Quiz</h3>
+      <p>Test your knowledge with these random questions</p>
+    </div>
+    
+    <div class="quiz-progress">
+      <div class="quiz-progress-bar" id="progressBar" style="width: 0%;"></div>
+      <div class="quiz-step active" id="step1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Question 1</div>
+      </div>
+      <div class="quiz-step" id="step2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Question 2</div>
+      </div>
+      <div class="quiz-step" id="step3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Question 3</div>
+      </div>
+    </div>
+    
+    <div id="quiz-content">
+      <!-- Quiz content will be dynamically inserted here -->
+    </div>
+    
+    <div class="quiz-navigation">
+      <button class="quiz-nav-btn prev" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+      <button class="quiz-nav-btn next" id="nextBtn" onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <!-- Quiz Results Section -->
+  <div class="quiz-results" id="quizResults">
+    <div class="results-header">
+      <h3>Quiz Results</h3>
+      <p>Here's how you performed on the quiz</p>
+    </div>
+    
+    <div class="score-display">
+      <div class="score-circle" id="scoreCircle">0/3</div>
+      <div class="score-details">
+        <p>You answered <span class="correct" id="correctCount">0</span> questions correctly</p>
+        <p>You answered <span class="incorrect" id="incorrectCount">0</span> questions incorrectly</p>
+      </div>
+    </div>
+    
+    <div class="results-questions" id="resultsQuestions">
+      <!-- Results for each question will be inserted here -->
+    </div>
+    
+    <div class="quiz-actions">
+      <button class="btn-primary" onclick="generateQuiz()">Try Again</button>
+      <button class="btn-secondary" onclick="closeQuizResults()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>About EduGlobe</h3>
+          <p>EduGlobe is a comprehensive online learning platform dedicated to providing high-quality education in Mathematics and Programming.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="topics.html">Topics</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Popular Topics</h3>
+          <ul>
+            <li><a href="#">Calculus</a></li>
+            <li><a href="#">Python Programming</a></li>
+            <li><a href="#">Algebra</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Data Structures</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter for the latest updates and learning resources.</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Your email address">
+            <button type="submit">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 EduGlobe. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-sql.min.js"></script>
+  <script>
+    // Topic details data with comprehensive content
+    const topicDetails = {
+      math1: {
+        title: "Algebra",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Algebra",
+            content: `
+              <h2>Algebra</h2>
+              <p><strong>Algebra</strong> is the branch of mathematics that deals with symbols and the rules for manipulating those symbols. It is a unifying thread of almost all of mathematics.</p>
+              
+              <h3>What is Algebra?</h3>
+              <p>Algebra is about finding the unknown or putting real-life variables into equations and then solving them. In simple terms:</p>
+              <ul>
+                <li><strong>Variables</strong> are symbols (like x or y) that represent an unknown value</li>
+                <li><strong>Equations</strong> are mathematical statements that assert the equality of two expressions</li>
+                <li><strong>Functions</strong> are relationships between inputs and outputs</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Algebra is fundamental to many fields, including mathematics, physics, engineering, computer science, and economics.</p>
+              </div>
+              
+              <h3>Why Learn Algebra?</h3>
+              <p>Algebra is essential because:</p>
+              <ul>
+                <li>It helps in solving real-world problems</li>
+                <li>It's the foundation for advanced mathematics</li>
+                <li>It develops critical thinking and problem-solving skills</li>
+              </ul>
+            `
+          },
+          {
+            id: "equations",
+            title: "Linear Equations",
+            content: `
+              <h2>Linear Equations</h2>
+              <p>A <strong>linear equation</strong> is an equation between two variables that gives a straight line when plotted on a graph.</p>
+              
+              <h3>Standard Form</h3>
+              <p>The standard form of a linear equation is: <code>ax + by = c</code></p>
+              
+              <h3>Solving Linear Equations</h3>
+              <p>Methods for solving linear equations include:</p>
+              <ul>
+                <li><strong>Substitution Method</strong>: Solve one equation for one variable and substitute into the other</li>
+                <li><strong>Elimination Method</strong>: Add or subtract equations to eliminate one variable</li>
+                <li><strong>Graphical Method</strong>: Plot both equations and find the intersection point</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Solving linear equations in Python
+import sympy as sp
+
+# Define variables
+x, y = sp.symbols('x y')
+
+# Define equations
+eq1 = sp.Eq(2*x + 3*y, 7)
+eq2 = sp.Eq(4*x - y, 7)
+
+# Solve the system of equations
+solution = sp.solve((eq1, eq2), (x, y))
+print("Solution:", solution)</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Solution: {x: 2, y: 1}
+              </div>
+              
+              <div class="try-it">
+                <h4>Try It Yourself</h4>
+                <p>Solve your own linear equations:</p>
+                <textarea id="linearTryIt"># Define variables
+x, y = sp.symbols('x y')
+
+# Define your equations
+eq1 = sp.Eq(3*x + 2*y, 11)
+eq2 = sp.Eq(x - y, 1)
+
+# Solve the system of equations
+solution = sp.solve((eq1, eq2), (x, y))
+print("Solution:", solution)</textarea>
+                <button onclick="runCode('linearTryIt')">Run Code</button>
+                <div id="linearTryItOutput" class="output" style="display: none;"></div>
+              </div>
+            `
+          },
+          {
+            id: "polynomials",
+            title: "Polynomials",
+            content: `
+              <h2>Polynomials</h2>
+              <p>A <strong>polynomial</strong> is an expression consisting of variables and coefficients, involving only the operations of addition, subtraction, multiplication, and non-negative integer exponents of variables.</p>
+              
+              <h3>Types of Polynomials</h3>
+              <ul>
+                <li><strong>Monomial</strong>: One term (e.g., 3x²)</li>
+                <li><strong>Binomial</strong>: Two terms (e.g., x² + 3x)</li>
+                <li><strong>Trinomial</strong>: Three terms (e.g., x² + 3x + 2)</li>
+              </ul>
+              
+              <h3>Operations on Polynomials</h3>
+              <p>Common operations include:</p>
+              <ul>
+                <li><strong>Addition/Subtraction</strong>: Combine like terms</li>
+                <li><strong>Multiplication</strong>: Use the distributive property</li>
+                <li><strong>Division</strong>: Long division or synthetic division</li>
+                <li><strong>Factoring</strong>: Express as a product of simpler polynomials</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Working with polynomials in Python
+import sympy as sp
+
+# Define a variable
+x = sp.symbols('x')
+
+# Define polynomials
+p1 = x**2 + 3*x + 2
+p2 = x**2 - x - 6
+
+# Add polynomials
+p_sum = p1 + p2
+print("Sum:", p_sum)
+
+# Multiply polynomials
+p_product = p1 * p2
+print("Product:", p_product)
+
+# Factor polynomials
+p1_factor = sp.factor(p1)
+p2_factor = sp.factor(p2)
+print("Factor of p1:", p1_factor)
+print("Factor of p2:", p2_factor)</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Sum: 2*x**2 + 2*x - 4<br>
+                Product: x**4 + 2*x**3 - 5*x**2 - 18*x - 12<br>
+                Factor of p1: (x + 1)*(x + 2)<br>
+                Factor of p2: (x - 3)*(x + 2)
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Algebra",
+            content: `
+              <h2>Applications of Algebra</h2>
+              <p>Algebra has numerous applications across various fields:</p>
+              
+              <h3>Science and Engineering</h3>
+              <p>Algebra is used in:</p>
+              <ul>
+                <li><strong>Physics</strong>: Modeling motion, forces, and energy</li>
+                <li><strong>Engineering</strong>: Designing structures and systems</li>
+                <li><strong>Chemistry</strong>: Balancing chemical equations</li>
+                <li><strong>Computer Science</strong>: Algorithm design and analysis</li>
+              </ul>
+              
+              <h3>Finance and Economics</h3>
+              <p>Applications include:</p>
+              <ul>
+                <li><strong>Interest Calculation</strong>: Compound and simple interest</li>
+                <li><strong>Investment Analysis</strong>: Calculating returns and risks</li>
+                <li><strong>Economic Modeling</strong>: Supply and demand curves</li>
+              </ul>
+              
+              <h3>Everyday Life</h3>
+              <p>Algebra helps in:</p>
+              <ul>
+                <li><strong>Budgeting</strong>: Managing personal finances</li>
+                <li><strong>Shopping</strong>: Comparing prices and discounts</li>
+                <li><strong>Travel</strong>: Calculating distances and times</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>These applications only scratch the surface of how algebra is used in various fields. It's truly a foundational mathematical discipline.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <h2>Algebra Quiz</h2>
+              <p>Test your understanding of Algebra with this interactive quiz:</p>
+              
+              <div class="quiz-section">
+                <h4>Question 1: What is the solution to the equation 2x + 5 = 13?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">x = 3</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">x = 4</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">x = 5</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">x = 6</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0" style="display: none;">
+                  <strong>Correct!</strong> The solution is x = 4. Subtract 5 from both sides: 2x = 8, then divide by 2: x = 4.
+                </div>
+                
+                <h4>Question 2: Which of the following is a polynomial?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">3x² + 2x - 1</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">√x + 3</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">1/x + 2</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">x^(-2) + 5</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1" style="display: none;">
+                  <strong>Correct!</strong> 3x² + 2x - 1 is a polynomial. Polynomials only have non-negative integer exponents.
+                </div>
+                
+                <h4>Question 3: What is the factored form of x² - 9?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 0)">(x + 3)(x + 3)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 1)">(x - 3)(x - 3)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 2)">(x + 3)(x - 3)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 3)">x(x - 9)</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-2" style="display: none;">
+                  <strong>Correct!</strong> The factored form of x² - 9 is (x + 3)(x - 3). This is an example of the difference of squares formula.
+                </div>
+              </div>
+              
+              <div class="note">
+                <div class="note-title">Tip:</div>
+                <p>Understanding these fundamental concepts is crucial for advancing in algebra. Practice with different examples to solidify your knowledge.</p>
+              </div>
+            `
+          }
+        ]
+      },
+      math2: {
+        title: "Geometry",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Geometry",
+            content: `
+              <h2>Geometry</h2>
+              <p><strong>Geometry</strong> is the branch of mathematics concerned with the properties and relations of points, lines, surfaces, solids, and higher dimensional analogs.</p>
+              
+              <h3>What is Geometry?</h3>
+              <p>Geometry is the study of shapes, sizes, positions, and dimensions of things. It can be divided into:</p>
+              <ul>
+                <li><strong>Plane Geometry</strong>: Study of flat shapes like lines, circles, and triangles</li>
+                <li><strong>Solid Geometry</strong>: Study of three-dimensional shapes like spheres, cubes, and cylinders</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Geometry has practical applications in many fields, including architecture, engineering, art, and physics.</p>
+              </div>
+              
+              <h3>Why Study Geometry?</h3>
+              <p>Geometry is essential because:</p>
+              <ul>
+                <li>It helps in understanding spatial relationships</li>
+                <li>It's used in design and construction</li>
+                <li>It develops logical reasoning and problem-solving skills</li>
+              </ul>
+            `
+          },
+          {
+            id: "shapes",
+            title: "Basic Shapes and Properties",
+            content: `
+              <h2>Basic Shapes and Properties</h2>
+              <p>Geometry studies various shapes and their properties:</p>
+              
+              <h3>Triangles</h3>
+              <p>Triangles are three-sided polygons with several types:</p>
+              <ul>
+                <li><strong>Equilateral Triangle</strong>: All sides equal, all angles 60°</li>
+                <li><strong>Isosceles Triangle</strong>: Two sides equal, two angles equal</li>
+                <li><strong>Scalene Triangle</strong>: No sides equal, no angles equal</li>
+                <li><strong>Right Triangle</strong>: One angle is 90°</li>
+              </ul>
+              
+              <h3>Quadrilaterals</h3>
+              <p>Four-sided polygons include:</p>
+              <ul>
+                <li><strong>Square</strong>: All sides equal, all angles 90°</li>
+                <li><strong>Rectangle</strong>: Opposite sides equal, all angles 90°</li>
+                <li><strong>Parallelogram</strong>: Opposite sides parallel and equal</li>
+                <li><strong>Trapezoid</strong>: One pair of parallel sides</li>
+              </ul>
+              
+              <h3>Circles</h3>
+              <p>A circle is a set of points equidistant from a center point. Key properties include:</p>
+              <ul>
+                <li><strong>Radius</strong>: Distance from center to any point on the circle</li>
+                <li><strong>Diameter</strong>: Distance across the circle through the center (2 × radius)</li>
+                <li><strong>Circumference</strong>: Perimeter of the circle (2πr)</li>
+                <li><strong>Area</strong>: Space inside the circle (πr²)</li>
+              </ul>
+            `
+          },
+          {
+            id: "theorems",
+            title: "Important Theorems",
+            content: `
+              <h2>Important Theorems</h2>
+              <p>Geometry is built on several fundamental theorems:</p>
+              
+              <h3>Pythagorean Theorem</h3>
+              <p>In a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides:</p>
+              <p><code>a² + b² = c²</code></p>
+              <p>where c is the hypotenuse and a, b are the other two sides.</p>
+              
+              <h3>Triangle Sum Theorem</h3>
+              <p>The sum of the interior angles of a triangle is always 180°.</p>
+              
+              <h3>Similar Triangles</h3>
+              <p>Two triangles are similar if their corresponding angles are equal and their corresponding sides are proportional.</p>
+              
+              <h3>Circle Theorems</h3>
+              <p>Important circle theorems include:</p>
+              <ul>
+                <li><strong>Inscribed Angle Theorem</strong>: An inscribed angle is half the measure of its intercepted arc</li>
+                <li><strong>Tangent-Secant Theorem</strong>: The square of the tangent equals the product of the secant and its external part</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Pythagorean theorem in Python
+import math
+
+def pythagorean_theorem(a, b):
+    """Calculate the hypotenuse of a right triangle"""
+    c = math.sqrt(a**2 + b**2)
+    return c
+
+# Example usage
+side_a = 3
+side_b = 4
+hypotenuse = pythagorean_theorem(side_a, side_b)
+print(f"The hypotenuse of a right triangle with sides {side_a} and {side_b} is {hypotenuse}")
+
+# Calculate area of a circle
+def circle_area(radius):
+    """Calculate the area of a circle"""
+    return math.pi * radius**2
+
+radius = 5
+area = circle_area(radius)
+print(f"The area of a circle with radius {radius} is {area:.2f}")</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                The hypotenuse of a right triangle with sides 3 and 4 is 5.0<br>
+                The area of a circle with radius 5 is 78.54
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Geometry",
+            content: `
+              <h2>Applications of Geometry</h2>
+              <p>Geometry has numerous applications across various fields:</p>
+              
+              <h3>Architecture and Construction</h3>
+              <p>Geometry is used in:</p>
+              <ul>
+                <li><strong>Building Design</strong>: Creating structurally sound buildings</li>
+                <li><strong>Urban Planning</strong>: Designing efficient city layouts</li>
+                <li><strong>Interior Design</strong>: Optimizing space utilization</li>
+              </ul>
+              
+              <h3>Art and Design</h3>
+              <p>Applications include:</p>
+              <ul>
+                <li><strong>Perspective Drawing</strong>: Creating realistic 3D representations</li>
+                <li><strong>Pattern Design</strong>: Creating symmetrical and repeating patterns</li>
+                <li><strong>Sculpture</strong>: Understanding spatial relationships</li>
+              </ul>
+              
+              <h3>Science and Engineering</h3>
+              <p>Geometry helps in:</p>
+              <ul>
+                <li><strong>Physics</strong>: Modeling motion and forces</li>
+                <li><strong>Engineering</strong>: Designing machines and structures</li>
+                <li><strong>Astronomy</strong>: Calculating distances and trajectories</li>
+              </ul>
+              
+              <h3>Technology</h3>
+              <p>Modern applications include:</p>
+              <ul>
+                <li><strong>Computer Graphics</strong>: Creating 3D models and animations</li>
+                <li><strong>Robotics</strong>: Path planning and navigation</li>
+                <li><strong>GPS</strong>: Triangulation for positioning</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>These applications only scratch the surface of how geometry is used in various fields. It's truly a foundational mathematical discipline.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <h2>Geometry Quiz</h2>
+              <p>Test your understanding of Geometry with this interactive quiz:</p>
+              
+              <div class="quiz-section">
+                <h4>Question 1: What is the sum of the interior angles of a triangle?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">90°</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">180°</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">270°</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">360°</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0" style="display: none;">
+                  <strong>Correct!</strong> The sum of the interior angles of a triangle is always 180°, regardless of the type of triangle.
+                </div>
+                
+                <h4>Question 2: In a right triangle with sides 3 and 4, what is the length of the hypotenuse?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">5</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">6</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">7</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">8</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1" style="display: none;">
+                  <strong>Correct!</strong> Using the Pythagorean theorem: 3² + 4² = 9 + 16 = 25, so the hypotenuse is √25 = 5.
+                </div>
+                
+                <h4>Question 3: What is the formula for the area of a circle with radius r?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 0)">2πr</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 1)">πr²</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 2)">πd</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 3)">2πr²</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-2" style="display: none;">
+                  <strong>Correct!</strong> The formula for the area of a circle with radius r is πr², where π is approximately 3.14159.
+                </div>
+              </div>
+              
+              <div class="note">
+                <div class="note-title">Tip:</div>
+                <p>Understanding these fundamental concepts is crucial for advancing in geometry. Practice with different examples to solidify your knowledge.</p>
+              </div>
+            `
+          }
+        ]
+      },
+      math3: {
+        title: "Calculus",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Calculus",
+            content: `
+              <h2>Calculus</h2>
+              <p><strong>Calculus</strong> is the mathematical study of continuous change, in the same way that geometry is the study of shape and algebra is the study of generalizations of arithmetic operations.</p>
+              
+              <h3>What is Calculus?</h3>
+              <p>Calculus is the branch of mathematics that deals with the finding and properties of derivatives and integrals of functions, by methods originally based on the summation of infinitesimal differences. The two main types are:</p>
+              <ul>
+                <li><strong>Differential Calculus</strong>: Concerning rates of change and slopes of curves</li>
+                <li><strong>Integral Calculus</strong>: Concerning accumulation of quantities and the areas under and between curves</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Calculus is fundamental to many scientific disciplines, especially physics and engineering. It provides a framework for modeling systems in which there is change, and a way to deduce the predictions of such models.</p>
+              </div>
+              
+              <h3>Why Study Calculus?</h3>
+              <p>Calculus is essential because:</p>
+              <ul>
+                <li>It allows us to find the rate of change of functions</li>
+                <li>It helps in calculating areas and volumes of complex shapes</li>
+                <li>It's used in optimization problems (finding maximum and minimum values)</li>
+                <li>It's fundamental to physics, engineering, economics, and many other fields</li>
+              </ul>
+              
+              <h3>A Brief History</h3>
+              <p>Calculus was independently developed in the late 17th century by Isaac Newton and Gottfried Wilhelm Leibniz. Today, it's a cornerstone of modern mathematics and science education.</p>
+            `
+          },
+          {
+            id: "derivatives",
+            title: "Derivatives",
+            content: `
+              <h2>Derivatives</h2>
+              <p>The <strong>derivative</strong> of a function of a real variable measures the sensitivity to change of the function value (output value) with respect to a change in its argument (input value).</p>
+              
+              <h3>Understanding Derivatives</h3>
+              <p>Geometrically, the derivative at a point is the slope of the tangent line to the graph of the function at that point. The process of finding a derivative is called <strong>differentiation</strong>.</p>
+              
+              <h3>Notation</h3>
+              <p>There are several ways to denote the derivative of a function y = f(x):</p>
+              <ul>
+                <li>Leibniz notation: <code>dy/dx</code> or <code>df/dx</code></li>
+                <li>Lagrange notation: <code>f'(x)</code></li>
+                <li>Newton notation: <code>ẏ</code> (dot notation)</li>
+                <li>Euler notation: <code>Dxf</code></li>
+              </ul>
+              
+              <h3>Basic Differentiation Rules</h3>
+              <p>Some fundamental rules of differentiation include:</p>
+              <ul>
+                <li><strong>Power Rule</strong>: If f(x) = xⁿ, then f'(x) = n·xⁿ⁻¹</li>
+                <li><strong>Sum Rule</strong>: (f + g)' = f' + g'</li>
+                <li><strong>Product Rule</strong>: (f·g)' = f'·g + f·g'</li>
+                <li><strong>Quotient Rule</strong>: (f/g)' = (f'·g - f·g')/g²</li>
+                <li><strong>Chain Rule</strong>: (f∘g)' = (f'∘g)·g'</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Calculating derivatives in Python
+import sympy as sp
+
+# Define a variable and a function
+x = sp.Symbol('x')
+f = x**3 + 2*x**2 + 5*x + 1
+
+# Calculate the derivative
+f_prime = sp.diff(f, x)
+print("f(x) =", f)
+print("f'(x) =", f_prime)
+
+# Calculate the derivative at a specific point
+x_val = 2
+derivative_at_point = f_prime.subs(x, x_val)
+print(f"f'({x_val}) =", derivative_at_point)
+
+# Calculate second derivative
+f_double_prime = sp.diff(f_prime, x)
+print("f''(x) =", f_double_prime)</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                f(x) = x**3 + 2*x**2 + 5*x + 1<br>
+                f'(x) = 3*x**2 + 4*x + 5<br>
+                f'(2) = 25<br>
+                f''(x) = 6*x + 4
+              </div>
+              
+              <div class="try-it">
+                <h4>Try It Yourself</h4>
+                <p>Calculate derivatives of different functions:</p>
+                <textarea id="derivativeTryIt"># Define a variable and a function
+x = sp.Symbol('x')
+f = x**4 - 3*x**2 + 2*x - 5
+
+# Calculate the first derivative
+f_prime = sp.diff(f, x)
+print("f(x) =", f)
+print("f'(x) =", f_prime)
+
+# Calculate the derivative at x = 1
+x_val = 1
+derivative_at_point = f_prime.subs(x, x_val)
+print(f"f'({x_val}) =", derivative_at_point)
+
+# Find critical points by setting f'(x) = 0
+critical_points = sp.solve(f_prime, x)
+print("Critical points:", critical_points)</textarea>
+                <button onclick="runCode('derivativeTryIt')">Run Code</button>
+                <div id="derivativeTryItOutput" class="output" style="display: none;"></div>
+              </div>
+            `
+          },
+          {
+            id: "integrals",
+            title: "Integrals",
+            content: `
+              <h2>Integrals</h2>
+              <p>The <strong>integral</strong> of a function can be interpreted as the area under the curve of the graph of the function. There are two types of integrals: definite and indefinite.</p>
+              
+              <h3>Types of Integrals</h3>
+              <ul>
+                <li><strong>Indefinite Integral</strong>: The antiderivative of a function, representing a family of functions differing by a constant</li>
+                <li><strong>Definite Integral</strong>: Represents the exact area under a curve between two points</li>
+              </ul>
+              
+              <h3>Notation</h3>
+              <p>The integral of a function f(x) is denoted as:</p>
+              <ul>
+                <li>Indefinite: <code>∫ f(x) dx = F(x) + C</code> where F'(x) = f(x)</li>
+                <li>Definite: <code>∫[a,b] f(x) dx = F(b) - F(a)</code></li>
+              </ul>
+              
+              <h3>Integration Techniques</h3>
+              <p>Common methods for finding integrals include:</p>
+              <ul>
+                <li><strong>Basic Integration Rules</strong>: Reverse of differentiation rules</li>
+                <li><strong>Substitution Method</strong>: Used when the integrand contains a function and its derivative</li>
+                <li><strong>Integration by Parts</strong>: Based on the product rule for differentiation</li>
+                <li><strong>Partial Fractions</strong>: Used for rational functions</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Calculating integrals in Python
+import sympy as sp
+
+# Define a variable and a function
+x = sp.Symbol('x')
+f = x**2 + 3*x + 2
+
+# Calculate the indefinite integral
+indefinite_integral = sp.integrate(f, x)
+print("∫ f(x) dx =", indefinite_integral)
+
+# Calculate the definite integral from 0 to 1
+definite_integral = sp.integrate(f, (x, 0, 1))
+print("∫[0,1] f(x) dx =", definite_integral)
+
+# Calculate a more complex integral
+g = sp.sin(x) * sp.exp(x)
+integral_g = sp.integrate(g, x)
+print("∫ sin(x)·e^x dx =", integral_g)</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                ∫ f(x) dx = x**3/3 + 3*x**2/2 + 2*x<br>
+                ∫[0,1] f(x) dx = 25/6<br>
+                ∫ sin(x)·e^x dx = (sin(x) - cos(x))*exp(x)/2
+              </div>
+              
+              <div class="try-it">
+                <h4>Try It Yourself</h4>
+                <p>Calculate integrals of different functions:</p>
+                <textarea id="integralTryIt"># Define a variable and a function
+x = sp.Symbol('x')
+f = x**3 - 4*x**2 + 6
+
+# Calculate the indefinite integral
+indefinite_integral = sp.integrate(f, x)
+print("∫ f(x) dx =", indefinite_integral)
+
+# Calculate the definite integral from 1 to 3
+definite_integral = sp.integrate(f, (x, 1, 3))
+print("∫[1,3] f(x) dx =", definite_integral)
+
+# Calculate the area under the curve from -1 to 2
+area = sp.integrate(f, (x, -1, 2))
+print("Area under curve from -1 to 2:", area)</textarea>
+                <button onclick="runCode('integralTryIt')">Run Code</button>
+                <div id="integralTryItOutput" class="output" style="display: none;"></div>
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Calculus",
+            content: `
+              <h2>Applications of Calculus</h2>
+              <p>Calculus has numerous applications across various fields. Here are some key examples:</p>
+              
+              <h3>Physics</h3>
+              <p>Calculus is fundamental to physics:</p>
+              <ul>
+                <li><strong>Motion</strong>: Velocity is the derivative of position with respect to time; acceleration is the derivative of velocity</li>
+                <li><strong>Electricity</strong>: Calculus is used in electromagnetic theory and circuit analysis</li>
+                <li><strong>Heat Transfer</strong>: Rate of heat flow is modeled using differential equations</li>
+                <li><strong>Quantum Mechanics</strong>: Wave functions and operators rely heavily on calculus</li>
+              </ul>
+              
+              <h3>Engineering</h3>
+              <p>Engineering applications of calculus:</p>
+              <ul>
+                <li><strong>Structural Analysis</strong>: Calculating stress, strain, and load distribution</li>
+                <li><strong>Fluid Dynamics</strong>: Modeling fluid flow and pressure</li>
+                <li><strong>Electrical Circuits</strong>: Analyzing current, voltage, and resistance</li>
+                <li><strong>Control Systems</strong>: Designing systems that maintain desired outputs</li>
+              </ul>
+              
+              <h3>Economics</h3>
+              <p>In economics, calculus is used for:</p>
+              <ul>
+                <li><strong>Marginal Analysis</strong>: Marginal cost is the derivative of total cost; marginal revenue is the derivative of total revenue</li>
+                <li><strong>Optimization</strong>: Finding maximum profit or minimum cost</li>
+                <li><strong>Elasticity</strong>: Measuring responsiveness of demand to price changes</li>
+                <li><strong>Economic Models</strong>: Many economic models use differential equations</li>
+              </ul>
+              
+              <h3>Biology</h3>
+              <p>Biological applications include:</p>
+              <ul>
+                <li><strong>Population Dynamics</strong>: Modeling population growth and interactions</li>
+                <li><strong>Pharmacokinetics</strong>: Modeling drug concentration in the body over time</li>
+                <li><strong>Enzyme Kinetics</strong>: Modeling reaction rates</li>
+                <li><strong>Neuroscience</strong>: Modeling neural activity</li>
+              </ul>
+              
+              <h3>Computer Science</h3>
+              <p>In computer science, calculus is used for:</p>
+              <ul>
+                <li><strong>Machine Learning</strong>: Gradient descent optimization uses derivatives</li>
+                <li><strong>Computer Graphics</strong>: Rendering and animation use calculus</li>
+                <li><strong>Algorithms</strong>: Many algorithms rely on calculus for optimization</li>
+                <li><strong>Data Science</strong>: Statistical models often use calculus</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>These applications only scratch the surface of how calculus is used across various disciplines. It's truly a foundational mathematical tool that enables us to model and understand change in the world around us.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <h2>Calculus Quiz</h2>
+              <p>Test your understanding of Calculus with this interactive quiz:</p>
+              
+              <div class="quiz-section">
+                <h4>Question 1: What is the derivative of x^n?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">n × x^(n-1)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">x^(n+1)/(n+1)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">n × x^(n+1)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">x^(n-1)/(n-1)</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0" style="display: none;">
+                  <strong>Correct!</strong> The derivative of x^n is n × x^(n-1). This is known as the power rule of differentiation.
+                </div>
+                
+                <h4>Question 2: What is the integral of 1/x?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">ln|x| + C</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">x^2/2 + C</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">e^x + C</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">-1/x^2 + C</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1" style="display: none;">
+                  <strong>Correct!</strong> The integral of 1/x is ln|x| + C. This is a fundamental integral result in calculus.
+                </div>
+                
+                <h4>Question 3: What does the second derivative represent?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 0)">Acceleration</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 1)">Velocity</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 2)">Position</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 3)">Jerk</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-2" style="display: none;">
+                  <strong>Correct!</strong> The second derivative represents acceleration. If position is s(t), then velocity is s'(t) and acceleration is s''(t).
+                </div>
+              </div>
+              
+              <div class="note">
+                <div class="note-title">Tip:</div>
+                <p>Understanding these fundamental concepts is crucial for advancing in calculus. Practice with different examples to solidify your knowledge.</p>
+              </div>
+            `
+          }
+        ]
+      },
+      math4: {
+        title: "Statistics",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Statistics",
+            content: `
+              <h2>Statistics</h2>
+              <p><strong>Statistics</strong> is the discipline that concerns the collection, organization, analysis, interpretation, and presentation of data.</p>
+              
+              <h3>What is Statistics?</h3>
+              <p>Statistics is the science of learning from data. It can be divided into two main branches:</p>
+              <ul>
+                <li><strong>Descriptive Statistics</strong>: Summarizing and organizing data</li>
+                <li><strong>Inferential Statistics</strong>: Making predictions or inferences about a population based on a sample</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Statistics is essential in many fields, including science, business, medicine, and public policy, as it helps in making informed decisions based on data.</p>
+              </div>
+              
+              <h3>Why Study Statistics?</h3>
+              <p>Statistics is essential because:</p>
+              <ul>
+                <li>It helps in understanding and interpreting data</li>
+                <li>It's used in making informed decisions</li>
+                <li>It's fundamental to research and scientific inquiry</li>
+                <li>It's used in quality control and process improvement</li>
+              </ul>
+            `
+          },
+          {
+            id: "descriptive",
+            title: "Descriptive Statistics",
+            content: `
+              <h2>Descriptive Statistics</h2>
+              <p><strong>Descriptive statistics</strong> are used to describe the basic features of data in a study. They provide simple summaries about the sample and the measures.</p>
+              
+              <h3>Measures of Central Tendency</h3>
+              <p>These measures describe the center of a dataset:</p>
+              <ul>
+                <li><strong>Mean</strong>: The average of all values (sum of values divided by count)</li>
+                <li><strong>Median</strong>: The middle value when data is arranged in order</li>
+                <li><strong>Mode</strong>: The most frequently occurring value</li>
+              </ul>
+              
+              <h3>Measures of Dispersion</h3>
+              <p>These measures describe the spread of data:</p>
+              <ul>
+                <li><strong>Range</strong>: Difference between the maximum and minimum values</li>
+                <li><strong>Variance</strong>: Average of the squared differences from the mean</li>
+                <li><strong>Standard Deviation</strong>: Square root of the variance</li>
+                <li><strong>Interquartile Range (IQR)</strong>: Difference between the 75th and 25th percentiles</li>
+              </ul>
+              
+              <h3>Data Visualization</h3>
+              <p>Common ways to visualize data include:</p>
+              <ul>
+                <li><strong>Histograms</strong>: Show the distribution of a continuous variable</li>
+                <li><strong>Box Plots</strong>: Display the five-number summary (min, Q1, median, Q3, max)</li>
+                <li><strong>Scatter Plots</strong>: Show the relationship between two variables</li>
+                <li><strong>Bar Charts</strong>: Compare categories of data</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Calculating descriptive statistics in Python
+import numpy as np
+
+# Sample data
+data = [12, 15, 18, 20, 22, 25, 28, 30, 32, 35]
+
+# Calculate measures of central tendency
+mean = np.mean(data)
+median = np.median(data)
+
+# Calculate measures of dispersion
+std_dev = np.std(data)
+variance = np.var(data)
+data_range = np.max(data) - np.min(data)
+
+print("Data:", data)
+print("Mean:", mean)
+print("Median:", median)
+print("Standard Deviation:", std_dev)
+print("Variance:", variance)
+print("Range:", data_range)</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Data: [12, 15, 18, 20, 22, 25, 28, 30, 32, 35]<br>
+                Mean: 23.7<br>
+                Median: 23.5<br>
+                Standard Deviation: 7.055...<br>
+                Variance: 49.777...<br>
+                Range: 23
+              </div>
+              
+              <div class="try-it">
+                <h4>Try It Yourself</h4>
+                <p>Calculate descriptive statistics for your own data:</p>
+                <textarea id="statsTryIt"># Your own data
+my_data = [10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
+
+# Calculate measures of central tendency
+mean = np.mean(my_data)
+median = np.median(my_data)
+
+# Calculate measures of dispersion
+std_dev = np.std(my_data)
+variance = np.var(my_data)
+data_range = np.max(my_data) - np.min(my_data)
+
+print("Data:", my_data)
+print("Mean:", mean)
+print("Median:", median)
+print("Standard Deviation:", std_dev)
+print("Variance:", variance)
+print("Range:", data_range)</textarea>
+                <button onclick="runCode('statsTryIt')">Run Code</button>
+                <div id="statsTryItOutput" class="output" style="display: none;"></div>
+              </div>
+            `
+          },
+          {
+            id: "probability",
+            title: "Probability",
+            content: `
+              <h2>Probability</h2>
+              <p><strong>Probability</strong> is the measure of the likelihood that an event will occur. It is quantified as a number between 0 and 1, where 0 indicates impossibility and 1 indicates certainty.</p>
+              
+              <h3>Basic Probability Concepts</h3>
+              <ul>
+                <li><strong>Sample Space</strong>: The set of all possible outcomes</li>
+                <li><strong>Event</strong>: A subset of the sample space</li>
+                <li><strong>Probability of an Event</strong>: Number of favorable outcomes divided by total number of outcomes</li>
+              </ul>
+              
+              <h3>Probability Rules</h3>
+              <ul>
+                <li><strong>Addition Rule</strong>: P(A or B) = P(A) + P(B) - P(A and B)</li>
+                <li><strong>Multiplication Rule</strong>: P(A and B) = P(A) × P(B|A)</li>
+                <li><strong>Complement Rule</strong>: P(not A) = 1 - P(A)</li>
+              </ul>
+              
+              <h3>Types of Probability</h3>
+              <ul>
+                <li><strong>Classical Probability</strong>: Based on equally likely outcomes</li>
+                <li><strong>Empirical Probability</strong>: Based on observed data</li>
+                <li><strong>Subjective Probability</strong>: Based on personal judgment</li>
+              </ul>
+              
+              <h3>Probability Distributions</h3>
+              <p>Common probability distributions include:</p>
+              <ul>
+                <li><strong>Normal Distribution</strong>: Bell-shaped curve, symmetric around the mean</li>
+                <li><strong>Binomial Distribution</strong>: Number of successes in a fixed number of trials</li>
+                <li><strong>Poisson Distribution</strong>: Number of events in a fixed interval of time</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Probability calculations in Python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Generate random data following a normal distribution
+mean = 100
+std_dev = 15
+sample_size = 1000
+data = np.random.normal(mean, std_dev, sample_size)
+
+# Calculate probability of a value being less than 110
+prob_less_than_110 = norm.cdf(110, mean, std_dev)
+print(f"Probability of a value being less than 110: {prob_less_than_110:.4f}")
+
+# Calculate probability of a value being between 90 and 110
+prob_between = norm.cdf(110, mean, std_dev) - norm.cdf(90, mean, std_dev)
+print(f"Probability of a value being between 90 and 110: {prob_between:.4f}")
+
+# Calculate the 95th percentile
+percentile_95 = norm.ppf(0.95, mean, std_dev)
+print(f"95th percentile: {percentile_95:.2f}")</code></pre>
+              </div>
+              
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Probability of a value being less than 110: 0.7475<br>
+                Probability of a value being between 90 and 110: 0.4950<br>
+                95th percentile: 124.67
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Statistics",
+            content: `
+              <h2>Applications of Statistics</h2>
+              <p>Statistics has numerous applications across various fields:</p>
+              
+              <h3>Business and Economics</h3>
+              <p>Statistics is used in:</p>
+              <ul>
+                <li><strong>Market Research</strong>: Analyzing consumer preferences and trends</li>
+                <li><strong>Quality Control</strong>: Monitoring product quality and processes</li>
+                <li><strong>Financial Analysis</strong>: Evaluating investment risks and returns</li>
+                <li><strong>Economic Forecasting</strong>: Predicting economic indicators</li>
+              </ul>
+              
+              <h3>Science and Medicine</h3>
+              <p>Applications include:</p>
+              <ul>
+                <li><strong>Clinical Trials</strong>: Testing the effectiveness of treatments</li>
+                <li><strong>Epidemiology</strong>: Studying disease patterns and risk factors</li>
+                <li><strong>Genetics</strong>: Analyzing genetic data and inheritance patterns</li>
+                <li><strong>Environmental Science</strong>: Monitoring climate change and pollution</li>
+              </ul>
+              
+              <h3>Social Sciences</h3>
+              <p>Statistics helps in:</p>
+              <ul>
+                <li><strong>Psychology</strong>: Analyzing experimental data and surveys</li>
+                <li><strong>Sociology</strong>: Studying social trends and demographics</li>
+                <li><strong>Education</strong>: Evaluating teaching methods and student performance</li>
+                <li><strong>Political Science</strong>: Analyzing voting patterns and public opinion</li>
+              </ul>
+              
+              <h3>Sports and Entertainment</h3>
+              <p>Applications include:</p>
+              <ul>
+                <li><strong>Sports Analytics</strong>: Evaluating player performance and team strategies</li>
+                <li><strong>Movie Recommendations</strong>: Predicting user preferences</li>
+                <li><strong>Music Streaming</strong>: Creating personalized playlists</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>These applications only scratch the surface of how statistics is used in various fields. It's truly a foundational discipline for data-driven decision making.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <h2>Statistics Quiz</h2>
+              <p>Test your understanding of Statistics with this interactive quiz:</p>
+              
+              <div class="quiz-section">
+                <h4>Question 1: What is the median of the dataset [2, 3, 5, 7, 11]?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">3</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">5</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">7</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">11</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0" style="display: none;">
+                  <strong>Correct!</strong> The median is 5, which is the middle value when the data is arranged in order.
+                </div>
+                
+                <h4>Question 2: What does a standard deviation measure?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">The average value</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">The spread of data around the mean</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">The middle value</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">The range of the data</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1" style="display: none;">
+                  <strong>Correct!</strong> Standard deviation measures the spread of data around the mean. A small standard deviation indicates that the data points tend to be close to the mean.
+                </div>
+                
+                <h4>Question 3: If the probability of event A is 0.3, what is the probability of not A?</h4>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 0)">0.3</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 1)">0.5</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 2)">0.7</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 2, 3)">1.0</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-2" style="display: none;">
+                  <strong>Correct!</strong> The probability of not A is 1 - P(A) = 1 - 0.3 = 0.7. This is known as the complement rule.
+                </div>
+              </div>
+              
+              <div class="note">
+                <div class="note-title">Tip:</div>
+                <p>Understanding these fundamental concepts is crucial for advancing in statistics. Practice with different examples to solidify your knowledge.</p>
+              </div>
+            `
+          }
+        ]
+      },
+      prog1: {
+        title: "Python",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Python",
+            content: `
+              <p>Python is a high-level, interpreted, general-purpose programming language. Its design philosophy emphasizes code readability with its notable use of significant indentation.</p>
+              <p>Python is dynamically typed and garbage-collected. It supports multiple programming paradigms, including structured (particularly procedural), object-oriented, and functional programming.</p>
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Python was created by Guido van Rossum and first released in 1991.</p>
+              </div>
+            `
+          },
+          {
+            id: "syntax",
+            title: "Basic Syntax",
+            content: `
+              <p>Python's syntax is simple and clean, which makes it easy to learn and read. Here are some basic elements of Python syntax:</p>
+              <ul>
+                <li>Python uses indentation to define code blocks</li>
+                <li>Comments start with #</li>
+                <li>Variables are created when you assign a value to them</li>
+                <li>Python has no command for declaring a variable</li>
+              </ul>
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># This is a comment
+print("Hello, World!")  # This is also a comment
+
+# Variables
+x = 5  # x is of type int
+y = "Hello"  # y is of type str
+print(x)
+print(y)
+
+# Multiple assignment
+a, b, c = 5, 3.2, "Hello"
+print(a)
+print(b)
+print(c)</code></pre>
+              </div>
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Hello, World!<br>
+                5<br>
+                Hello<br>
+                5<br>
+                3.2<br>
+                Hello
+              </div>
+            `
+          },
+          {
+            id: "datatypes",
+            title: "Data Types",
+            content: `
+              <p>Python has the following data types built-in by default:</p>
+              <ul>
+                <li><strong>Text Type:</strong> str</li>
+                <li><strong>Numeric Types:</strong> int, float, complex</li>
+                <li><strong>Sequence Types:</strong> list, tuple, range</li>
+                <li><strong>Mapping Type:</strong> dict</li>
+                <li><strong>Set Types:</strong> set, frozenset</li>
+                <li><strong>Boolean Type:</strong> bool</li>
+                <li><strong>Binary Types:</strong> bytes, bytearray, memoryview</li>
+              </ul>
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Python Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-python"># Different data types in Python
+# String
+name = "John Doe"
+print("String:", name, type(name))
+
+# Integer
+age = 30
+print("Integer:", age, type(age))
+
+# Float
+height = 5.9
+print("Float:", height, type(height))
+
+# List
+fruits = ["apple", "banana", "cherry"]
+print("List:", fruits, type(fruits))
+
+# Dictionary
+person = {"name": "John", "age": 30}
+print("Dictionary:", person, type(person))
+
+# Boolean
+is_student = True
+print("Boolean:", is_student, type(is_student))</code></pre>
+              </div>
+              <div class="output">
+                <div class="output-title">Output:</div>
+                String: John Doe <class 'str'><br>
+                Integer: 30 <class 'int'><br>
+                Float: 5.9 <class 'float'><br>
+                List: ['apple', 'banana', 'cherry'] <class 'list'><br>
+                Dictionary: {'name': 'John', 'age': 30} <class 'dict'><br>
+                Boolean: True <class 'bool'>
+              </div>
+            `
+          },
+          {
+            id: "tryit",
+            title: "Try It Yourself",
+            content: `
+              <div class="try-it">
+                <h4>Python Code Editor</h4>
+                <p>Try the following code in the editor below:</p>
+                <textarea id="pythonCode"># Write your Python code here
+name = "Your Name"
+print("Hello, " + name + "!")
+
+# Try creating a list and printing its elements
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)
+
+# Try a simple calculation
+print("Square of 5: 25")</textarea>
+                <button onclick="runPythonCode()">Run Code</button>
+                <div id="pythonOutput" class="output" style="display: none;">
+                  <div class="output-title">Output:</div>
+                  <div id="pythonOutputContent"></div>
+                </div>
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Python",
+            content: `
+              <p>Python is used in many domains:</p>
+              <ul>
+                <li><strong>Web Development</strong>: Frameworks like Django and Flask</li>
+                <li><strong>Data Science</strong>: Libraries like NumPy, Pandas, and Matplotlib</li>
+                <li><strong>Machine Learning</strong>: Libraries like TensorFlow, PyTorch, and scikit-learn</li>
+                <li><strong>Automation</strong>: Scripting and task automation</li>
+                <li><strong>Game Development</strong>: Libraries like Pygame</li>
+                <li><strong>Desktop Applications</strong>: Frameworks like Tkinter, PyQt</li>
+              </ul>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <div class="quiz-section">
+                <h4>Test your understanding of Python</h4>
+                <div class="quiz-question">1. Which of the following is the correct way to create a list in Python?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">list = [1, 2, 3]</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">list = (1, 2, 3)</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">list = {1, 2, 3}</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">list = 1, 2, 3</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0">Correct! Lists in Python are created using square brackets.</div>
+                
+                <div class="quiz-question">2. What is the output of print(2 ** 3)?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">5</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">6</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">8</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">9</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1">Correct! The ** operator is used for exponentiation in Python, so 2 ** 3 equals 8.</div>
+              </div>
+            `
+          }
+        ]
+      },
+      prog2: {
+        title: "Java",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Java",
+            content: `
+              <p>Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible.</p>
+              <p>Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture.</p>
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Java was developed by James Gosling at Sun Microsystems and released in 1995. It is now owned by Oracle.</p>
+              </div>
+            `
+          },
+          {
+            id: "syntax",
+            title: "Basic Syntax",
+            content: `
+              <p>Java syntax is strongly influenced by C/C++, but it has fewer low-level facilities. Here are some basic elements:</p>
+              <ul>
+                <li>Java is case-sensitive</li>
+                <li>All method names must start with a lowercase letter</li>
+                <li>All class names must start with an uppercase letter</li>
+                <li>Java programs must have a class name that matches the filename</li>
+              </ul>
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Java Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-java">// This is a simple Java program
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        
+        // Variables
+        int x = 5;
+        String y = "Hello";
+        System.out.println(x);
+        System.out.println(y);
+    }
+}</code></pre>
+              </div>
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Hello, World!<br>
+                5<br>
+                Hello
+              </div>
+            `
+          },
+          {
+            id: "datatypes",
+            title: "Data Types",
+            content: `
+              <p>Java has two categories of data types:</p>
+              
+              <h3>Primitive Data Types</h3>
+              <ul>
+                <li><strong>byte</strong>: 8-bit signed integer</li>
+                <li><strong>short</strong>: 16-bit signed integer</li>
+                <li><strong>int</strong>: 32-bit signed integer</li>
+                <li><strong>long</strong>: 64-bit signed integer</li>
+                <li><strong>float</strong>: 32-bit floating point</li>
+                <li><strong>double</strong>: 64-bit floating point</li>
+                <li><strong>boolean</strong>: true or false</li>
+                <li><strong>char</strong>: 16-bit Unicode character</li>
+              </ul>
+              
+              <h3>Reference Data Types</h3>
+              <ul>
+                <li><strong>String</strong>: Sequence of characters</li>
+                <li><strong>Arrays</strong>: Collection of similar type elements</li>
+                <li><strong>Classes</strong>: User-defined data types</li>
+                <li><strong>Interfaces</strong>: Abstract types</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Java Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-java">// Different data types in Java
+public class DataTypes {
+    public static void main(String[] args) {
+        // Primitive types
+        int age = 30;
+        double height = 5.9;
+        boolean isStudent = true;
+        char grade = 'A';
+        
+        // Reference types
+        String name = "John Doe";
+        int[] numbers = {1, 2, 3, 4, 5};
+        
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + height);
+        System.out.println("Is Student: " + isStudent);
+        System.out.println("Grade: " + grade);
+        
+        System.out.print("Numbers: ");
+        for (int num : numbers) {
+            System.out.print(num + " ");
+        }
+    }
+}</code></pre>
+              </div>
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Name: John Doe<br>
+                Age: 30<br>
+                Height: 5.9<br>
+                Is Student: true<br>
+                Grade: A<br>
+                Numbers: 1 2 3 4 5
+              </div>
+            `
+          },
+          {
+            id: "oop",
+            title: "Object-Oriented Programming",
+            content: `
+              <p>Java is an object-oriented programming language. The main principles of OOP are:</p>
+              <ul>
+                <li><strong>Encapsulation</strong>: Bundling data and methods that operate on the data</li>
+                <li><strong>Inheritance</strong>: Creating new classes based on existing ones</li>
+                <li><strong>Polymorphism</strong>: The ability of an object to take many forms</li>
+                <li><strong>Abstraction</strong>: Hiding implementation details and showing only functionality</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">Java Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-java">// Example of OOP in Java
+// Base class
+class Animal {
+    protected String name;
+    
+    public Animal(String name) {
+        this.name = name;
+    }
+    
+    public void eat() {
+        System.out.println(name + " is eating");
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+    
+    public void bark() {
+        System.out.println(name + " is barking");
+    }
+}
+
+public class OOPExample {
+    public static void main(String[] args) {
+        Dog myDog = new Dog("Buddy");
+        myDog.eat();  // Inherited method
+        myDog.bark(); // Dog's own method
+    }
+}</code></pre>
+              </div>
+              <div class="output">
+                <div class="output-title">Output:</div>
+                Buddy is eating<br>
+                Buddy is barking
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Java",
+            content: `
+              <p>Java is widely used in many domains:</p>
+              <ul>
+                <li><strong>Enterprise Applications</strong>: Large-scale business applications</li>
+                <li><strong>Android Development</strong>: Native Android apps are primarily written in Java</li>
+                <li><strong>Web Applications</strong>: Using frameworks like Spring, Hibernate</li>
+                <li><strong>Big Data Technologies</strong>: Hadoop, Spark, and other big data tools</li>
+                <li><strong>Scientific Computing</strong>: For numerical and scientific applications</li>
+                <li><strong>Desktop Applications</strong>: Using JavaFX or Swing</li>
+              </ul>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <div class="quiz-section">
+                <h4>Test your understanding of Java</h4>
+                <div class="quiz-question">1. Which of the following is not a primitive data type in Java?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">int</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">String</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">boolean</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">char</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0">Correct! String is a reference data type, not a primitive type.</div>
+                
+                <div class="quiz-question">2. What is the output of System.out.println(5 + 3 + "Hello");?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">8Hello</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">5 + 3Hello</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">Hello8</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">Hello5 + 3</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1">Correct! In Java, when an integer is added to a string, the integer is converted to a string and concatenated.</div>
+              </div>
+            `
+          }
+        ]
+      },
+      prog3: {
+        title: "Web Development",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Web Development",
+            content: `
+              <p>Web development is the work involved in developing a website for the Internet or an intranet. It can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.</p>
+              
+              <h3>Frontend vs Backend</h3>
+              <p>Web development is generally divided into two main categories:</p>
+              <ul>
+                <li><strong>Frontend Development</strong>: The client-side of the application, everything the user sees and interacts with</li>
+                <li><strong>Backend Development</strong>: The server-side of the application, which handles data, logic, and authentication</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Full-stack developers are proficient in both frontend and backend development.</p>
+              </div>
+            `
+          },
+          {
+            id: "html",
+            title: "HTML - The Structure",
+            content: `
+              <p><strong>HTML (HyperText Markup Language)</strong> is the standard markup language for creating web pages. It provides the structure and content of a webpage.</p>
+              
+              <h3>Basic HTML Structure</h3>
+              <p>Every HTML document has a basic structure:</p>
+              <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code>: Declares the document type</li>
+                <li><code>&lt;html&gt;</code>: The root element of an HTML page</li>
+                <li><code>&lt;head&gt;</code>: Contains meta-information about the document</li>
+                <li><code>&lt;body&gt;</code>: Contains the visible page content</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">HTML Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Web Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;First item&lt;/li&gt;
+        &lt;li&gt;Second item&lt;/li&gt;
+        &lt;li&gt;Third item&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+              </div>
+            `
+          },
+          {
+            id: "css",
+            title: "CSS - The Style",
+            content: `
+              <p><strong>CSS (Cascading Style Sheets)</strong> is used to style and layout web pages. It controls the colors, fonts, spacing, and positioning of HTML elements.</p>
+              
+              <h3>How CSS Works</h3>
+              <p>CSS works by associating style rules with HTML elements. Each rule consists of:</p>
+              <ul>
+                <li><strong>Selector</strong>: Selects the HTML element to style</li>
+                <li><strong>Declaration</strong>: Contains a property and a value</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">CSS Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-css">/* CSS Example */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #3949ab;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.button {
+    display: inline-block;
+    background-color: #3949ab;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #303f9f;
+}</code></pre>
+              </div>
+            `
+          },
+          {
+            id: "javascript",
+            title: "JavaScript - The Behavior",
+            content: `
+              <p><strong>JavaScript</strong> is a programming language that enables interactive web pages. It is an essential part of web applications.</p>
+              
+              <h3>What JavaScript Can Do</h3>
+              <p>JavaScript can:</p>
+              <ul>
+                <li>Change HTML content and attributes</li>
+                <li>Change CSS styles</li>
+                <li>React to user events (clicks, keyboard input, etc.)</li>
+                <li>Validate form data</li>
+                <li>Create animations and interactive effects</li>
+                <li>Fetch data from servers</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">JavaScript Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-javascript">// JavaScript Example
+// Change HTML content
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
+
+// Change CSS style
+document.getElementById("demo").style.color = "blue";
+
+// React to user events
+document.getElementById("myButton").addEventListener("click", function() {
+    alert("Button clicked!");
+});
+
+// Form validation
+function validateForm() {
+    const x = document.forms["myForm"]["fname"].value;
+    if (x === "") {
+        alert("Name must be filled out");
+        return false;
+    }
+}
+
+// Fetch data from server
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data));</code></pre>
+              </div>
+            `
+          },
+          {
+            id: "frameworks",
+            title: "Web Development Frameworks",
+            content: `
+              <p>Web development frameworks provide a structure and set of tools to simplify the development process.</p>
+              
+              <h3>Frontend Frameworks</h3>
+              <ul>
+                <li><strong>React</strong>: A JavaScript library for building user interfaces</li>
+                <li><strong>Angular</strong>: A platform for building mobile and desktop web applications</li>
+                <li><strong>Vue.js</strong>: A progressive framework for building user interfaces</li>
+                <li><strong>Bootstrap</strong>: A CSS framework for responsive design</li>
+              </ul>
+              
+              <h3>Backend Frameworks</h3>
+              <ul>
+                <li><strong>Node.js</strong>: A JavaScript runtime built on Chrome's V8 JavaScript engine</li>
+                <li><strong>Django</strong>: A high-level Python web framework</li>
+                <li><strong>Express.js</strong>: A minimal and flexible Node.js web application framework</li>
+                <li><strong>Ruby on Rails</strong>: A server-side web application framework written in Ruby</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Choosing the right framework depends on your project requirements, team expertise, and performance needs.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <div class="quiz-section">
+                <h4>Test your understanding of Web Development</h4>
+                <div class="quiz-question">1. Which HTML tag is used to create a hyperlink?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">&lt;link&gt;</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">&lt;a&gt;</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">&lt;href&gt;</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">&lt;url&gt;</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0">Correct! The &lt;a&gt; tag is used to create hyperlinks in HTML.</div>
+                
+                <div class="quiz-question">2. Which CSS property is used to change the text color of an element?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">text-color</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">color</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">font-color</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">text-style</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1">Correct! The color property is used to change the text color of an element in CSS.</div>
+              </div>
+            `
+          }
+        ]
+      },
+      prog4: {
+        title: "Database",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Databases",
+            content: `
+              <p>A <strong>database</strong> is an organized collection of structured information, or data, typically stored electronically in a computer system.</p>
+              
+              <h3>Why Use Databases?</h3>
+              <p>Databases are used to:</p>
+              <ul>
+                <li>Store large amounts of data efficiently</li>
+                <li>Manage and organize data</li>
+                <li>Retrieve data quickly and efficiently</li>
+                <li>Ensure data integrity and security</li>
+                <li>Allow multiple users to access data simultaneously</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>Databases are the backbone of almost every modern application, from social media platforms to banking systems.</p>
+              </div>
+            `
+          },
+          {
+            id: "types",
+            title: "Types of Databases",
+            content: `
+              <p>There are several types of databases, each with its own strengths and use cases:</p>
+              
+              <h3>Relational Databases</h3>
+              <p>Relational databases store data in tables with rows and columns. They use SQL (Structured Query Language) for querying and managing data.</p>
+              <ul>
+                <li><strong>MySQL</strong>: Open-source relational database</li>
+                <li><strong>PostgreSQL</strong>: Advanced open-source relational database</li>
+                <li><strong>Oracle</strong>: Commercial relational database</li>
+                <li><strong>SQL Server</strong>: Microsoft's relational database</li>
+              </ul>
+              
+              <h3>NoSQL Databases</h3>
+              <p>NoSQL databases provide a mechanism for storage and retrieval of data that is modeled in means other than the tabular relations used in relational databases.</p>
+              <ul>
+                <li><strong>MongoDB</strong>: Document-oriented NoSQL database</li>
+                <li><strong>Redis</strong>: In-memory key-value store</li>
+                <li><strong>Cassandra</strong>: Wide-column store NoSQL database</li>
+                <li><strong>Neo4j</strong>: Graph database</li>
+              </ul>
+            `
+          },
+          {
+            id: "sql",
+            title: "SQL - Structured Query Language",
+            content: `
+              <p><strong>SQL (Structured Query Language)</strong> is a standard language for managing data held in a relational database management system.</p>
+              
+              <h3>Basic SQL Commands</h3>
+              <p>SQL is divided into several categories:</p>
+              <ul>
+                <li><strong>DQL (Data Query Language)</strong>: SELECT</li>
+                <li><strong>DML (Data Manipulation Language)</strong>: INSERT, UPDATE, DELETE</li>
+                <li><strong>DDL (Data Definition Language)</strong>: CREATE, ALTER, DROP</li>
+                <li><strong>DCL (Data Control Language)</strong>: GRANT, REVOKE</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">SQL Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-sql">-- Create a table
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT,
+    enrollment_date DATE
+);
+
+-- Insert data
+INSERT INTO students (name, email, age, enrollment_date)
+VALUES ('John Doe', 'john@example.com', 20, '2023-09-01');
+
+-- Query data
+SELECT * FROM students WHERE age > 18;
+
+-- Update data
+UPDATE students SET age = 21 WHERE id = 1;
+
+-- Delete data
+DELETE FROM students WHERE id = 1;
+
+-- Join tables
+SELECT s.name, c.course_name
+FROM students s
+JOIN enrollments e ON s.id = e.student_id
+JOIN courses c ON e.course_id = c.id;</code></pre>
+              </div>
+            `
+          },
+          {
+            id: "design",
+            title: "Database Design",
+            content: `
+              <p>Good database design is crucial for creating efficient and maintainable databases.</p>
+              
+              <h3>Normalization</h3>
+              <p>Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. The most common normal forms are:</p>
+              <ul>
+                <li><strong>First Normal Form (1NF)</strong>: Each cell contains a single value</li>
+                <li><strong>Second Normal Form (2NF)</strong>: No partial dependencies</li>
+                <li><strong>Third Normal Form (3NF)</strong>: No transitive dependencies</li>
+              </ul>
+              
+              <h3>Entity-Relationship Model</h3>
+              <p>The ER model is used to represent the conceptual design of a database. It consists of:</p>
+              <ul>
+                <li><strong>Entities</strong>: Objects or things in the real world</li>
+                <li><strong>Attributes</strong>: Properties of entities</li>
+                <li><strong>Relationships</strong>: Associations between entities</li>
+              </ul>
+              
+              <div class="code-example">
+                <div class="code-header">
+                  <span class="language">SQL Example</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code class="language-sql">-- Example of normalized database design
+-- Students table
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT
+);
+
+-- Courses table
+CREATE TABLE courses (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    credits INT
+);
+
+-- Enrollments table (junction table)
+CREATE TABLE enrollments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    course_id INT,
+    grade VARCHAR(2),
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
+);</code></pre>
+              </div>
+            `
+          },
+          {
+            id: "applications",
+            title: "Applications of Databases",
+            content: `
+              <p>Databases are used in virtually every industry and application:</p>
+              
+              <h3>Business Applications</h3>
+              <ul>
+                <li><strong>Customer Relationship Management (CRM)</strong>: Storing customer information and interactions</li>
+                <li><strong>Enterprise Resource Planning (ERP)</strong>: Managing business processes</li>
+                <li><strong>E-commerce</strong>: Product catalogs, orders, and customer data</li>
+                <li><strong>Financial Systems</strong>: Transactions, accounts, and financial records</li>
+              </ul>
+              
+              <h3>Technology Applications</h3>
+              <ul>
+                <li><strong>Social Media</strong>: User profiles, posts, and connections</li>
+                <li><strong>Content Management Systems</strong>: Storing and organizing content</li>
+                <li><strong>Analytics and Reporting</strong>: Storing and analyzing large datasets</li>
+                <li><strong>IoT (Internet of Things)</strong>: Collecting and processing sensor data</li>
+              </ul>
+              
+              <div class="note">
+                <div class="note-title">Note:</div>
+                <p>With the rise of big data, modern databases are designed to handle massive volumes of data and provide real-time processing capabilities.</p>
+              </div>
+            `
+          },
+          {
+            id: "quiz",
+            title: "Knowledge Check",
+            content: `
+              <div class="quiz-section">
+                <h4>Test your understanding of Databases</h4>
+                <div class="quiz-question">1. Which SQL command is used to retrieve data from a database?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 0)">GET</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 1)">SELECT</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 2)">FETCH</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 0, 3)">RETRIEVE</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-0">Correct! The SELECT command is used to retrieve data from a database in SQL.</div>
+                
+                <div class="quiz-question">2. Which of the following is a NoSQL database?</div>
+                <div class="quiz-options">
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 0)">MySQL</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 1)">PostgreSQL</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 2)">MongoDB</div>
+                  <div class="quiz-option" onclick="selectQuizOption(this, 1, 3)">SQL Server</div>
+                </div>
+                <div class="quiz-result" id="quiz-result-1">Correct! MongoDB is a document-oriented NoSQL database, while the others are relational databases.</div>
+              </div>
+            `
+          }
+        ]
+      }
+    };
+
+    let currentTopicId = null;
+
+    // Tab functionality
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      
+      tablinks = document.getElementsByClassName("tab-btn");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Show topic details in modal
+    function showTopicDetails(topicId) {
+      currentTopicId = topicId;
+      const modal = document.getElementById("topicModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const sidebarNav = document.getElementById("sidebarNav");
+      const contentArea = document.getElementById("contentArea");
+      
+      const topic = topicDetails[topicId];
+      
+      if (topic) {
+        modalTitle.textContent = topic.title;
+        
+        // Build sidebar navigation
+        sidebarNav.innerHTML = '';
+        topic.sections.forEach((section, index) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.textContent = section.title;
+          a.href = `#${section.id}`;
+          a.onclick = function() { showSection(section.id); return false; };
+          if (index === 0) {
+            a.classList.add('active');
+          }
+          li.appendChild(a);
+          sidebarNav.appendChild(li);
+        });
+        
+        // Build content sections
+        contentArea.innerHTML = '';
+        topic.sections.forEach((section, index) => {
+          const sectionDiv = document.createElement('div');
+          sectionDiv.className = 'content-section';
+          sectionDiv.id = section.id;
+          sectionDiv.innerHTML = section.content;
+          if (index === 0) {
+            sectionDiv.classList.add('active');
+          }
+          contentArea.appendChild(sectionDiv);
+        });
+        
+        modal.style.display = "block";
+        
+        // Highlight code
+        if (typeof Prism !== 'undefined') {
+          Prism.highlightAll();
+        }
+      }
+    }
+
+    // Show specific section
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      const navLinks = document.querySelectorAll('.sidebar a');
+      
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      document.getElementById(sectionId).classList.add('active');
+      document.querySelector(`.sidebar a[href="#${sectionId}"]`).classList.add('active');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("topicModal").style.display = "none";
+    }
+
+    // Copy code to clipboard
+    function copyCode(button) {
+      const codeBlock = button.parentElement.nextElementSibling.querySelector('code');
+      const textArea = document.createElement('textarea');
+      textArea.value = codeBlock.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      // Change button text temporarily
+      const originalText = button.textContent;
+      button.textContent = 'Copied!';
+      setTimeout(() => {
+        button.textContent = originalText;
+      }, 2000);
+    }
+
+    // Run Python code (simulated)
+    function runPythonCode() {
+      const code = document.getElementById('pythonCode').value;
+      const outputDiv = document.getElementById('pythonOutput');
+      const outputContent = document.getElementById('pythonOutputContent');
+      
+      // This is a simplified simulation of Python execution
+      // In a real application, you would need a backend service to execute Python code
+      let output = '';
+      
+      try {
+        // Simple simulation of print statements
+        const printStatements = code.match(/print\(([^)]+)\)/g);
+        if (printStatements) {
+          printStatements.forEach(stmt => {
+            // Extract the content inside print()
+            const content = stmt.match(/print\(([^)]+)\)/)[1];
+            // Remove quotes if it's a string
+            if ((content.startsWith('"') && content.endsWith('"')) || 
+                (content.startsWith("'") && content.endsWith("'"))) {
+              output += content.slice(1, -1) + '<br>';
+            } else {
+              // This is a very basic simulation and won't work for complex expressions
+              output += content + '<br>';
+            }
+          });
+        }
+        
+        // Simulate other operations
+        if (code.includes('fruits')) {
+          output += 'apple<br>banana<br>cherry<br>';
+        }
+        
+        outputContent.innerHTML = output || 'No output to display';
+        outputDiv.style.display = 'block';
+      } catch (error) {
+        outputContent.innerHTML = `Error: ${error.message}`;
+        outputDiv.style.display = 'block';
+      }
+    }
+
+    // Run code for try-it sections
+    function runCode(textareaId) {
+      const textarea = document.getElementById(textareaId);
+      const outputDiv = document.getElementById(textareaId + 'Output');
+      
+      // This is a simplified simulation of code execution
+      // In a real application, you would need a backend service to execute code
+      let output = '';
+      
+      try {
+        // Simple simulation of print statements
+        const printStatements = textarea.value.match(/print\(([^)]+)\)/g);
+        if (printStatements) {
+          printStatements.forEach(stmt => {
+            // Extract the content inside print()
+            const content = stmt.match(/print\(([^)]+)\)/)[1];
+            // Remove quotes if it's a string
+            if ((content.startsWith('"') && content.endsWith('"')) || 
+                (content.startsWith("'") && content.endsWith("'"))) {
+              output += content.slice(1, -1) + '<br>';
+            } else {
+              // This is a very basic simulation and won't work for complex expressions
+              output += content + '<br>';
+            }
+          });
+        }
+        
+        outputDiv.innerHTML = output || 'No output to display';
+        outputDiv.style.display = 'block';
+      } catch (error) {
+        outputDiv.innerHTML = `Error: ${error.message}`;
+        outputDiv.style.display = 'block';
+      }
+    }
+
+    // Select quiz option
+    function selectQuizOption(element, questionIndex, optionIndex) {
+      const options = element.parentElement.querySelectorAll('.quiz-option');
+      options.forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      element.classList.add('selected');
+      
+      // Show result
+      const resultDiv = document.getElementById(`quiz-result-${questionIndex}`);
+      resultDiv.style.display = 'block';
+    }
+
+    // Complete topic and show quiz
+    function completeTopic(topicId) {
+      const topicCard = document.getElementById(topicId);
+      
+      // Mark topic as completed
+      topicCard.classList.add("completed");
+      
+      // Close modal
+      closeModal();
+      
+      // Show quiz after a short delay
+      setTimeout(() => {
+        generateQuiz();
+      }, 500);
+    }
+
+    // Calculator functionality
+    function toggleCalculator() {
+      const calculator = document.getElementById("calculator");
+      calculator.classList.toggle("active");
+    }
+
+    function appendToCalc(value) {
+      const display = document.getElementById("calc-display");
+      display.value += value;
+    }
+
+    function clearCalc() {
+      const display = document.getElementById("calc-display");
+      display.value = "";
+    }
+
+    function calculateResult() {
+      const display = document.getElementById("calc-display");
+      try {
+        display.value = eval(display.value);
+      } catch (e) {
+        display.value = "Error";
+      }
+    }
+
+    // Quiz functionality - Updated
+    const quizQuestions = [
+      {
+        question: "What is the capital of France?",
+        options: ["London", "Berlin", "Paris", "Madrid"],
+        correct: 2
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Venus", "Mars", "Jupiter", "Saturn"],
+        correct: 1
+      },
+      {
+        question: "What is the largest ocean on Earth?",
+        options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        correct: 3
+      },
+      {
+        question: "Who painted the Mona Lisa?",
+        options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+        correct: 2
+      },
+      {
+        question: "Which country is home to the kangaroo?",
+        options: ["New Zealand", "Australia", "South Africa", "Argentina"],
+        correct: 1
+      },
+      {
+        question: "What is the smallest country in the world?",
+        options: ["Monaco", "Vatican City", "San Marino", "Liechtenstein"],
+        correct: 1
+      },
+      {
+        question: "Which is the longest river in the world?",
+        options: ["Amazon", "Nile", "Yangtze", "Mississippi"],
+        correct: 1
+      },
+      {
+        question: "What is the hardest natural substance on Earth?",
+        options: ["Gold", "Iron", "Diamond", "Platinum"],
+        correct: 2
+      },
+      {
+        question: "Which element has the chemical symbol 'O'?",
+        options: ["Gold", "Oxygen", "Osmium", "Oganesson"],
+        correct: 1
+      },
+      {
+        question: "In which year did World War II end?",
+        options: ["1943", "1944", "1945", "1946"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+
+    function generateQuiz() {
+      // Reset quiz state
+      currentQuestions = [];
+      currentQuestionIndex = 0;
+      userAnswers = [];
+      
+      // Hide results if showing
+      document.getElementById("quizResults").classList.remove("active");
+      
+      // Get 3 random questions
+      const shuffledQuestions = [...quizQuestions].sort(() => 0.5 - Math.random());
+      currentQuestions = shuffledQuestions.slice(0, 3);
+      
+      // Show quiz container
+      document.getElementById("quiz").classList.add("active");
+      
+      // Display first question
+      displayQuestion();
+    }
+
+    function displayQuestion() {
+      const quizContent = document.getElementById("quiz-content");
+      const question = currentQuestions[currentQuestionIndex];
+      
+      // Update progress bar
+      const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+      document.getElementById("progressBar").style.width = `${progress}%`;
+      
+      // Update step indicators
+      for (let i = 1; i <= 3; i++) {
+        const step = document.getElementById(`step${i}`);
+        if (i < currentQuestionIndex + 1) {
+          step.classList.add("completed");
+          step.classList.remove("active");
+        } else if (i === currentQuestionIndex + 1) {
+          step.classList.add("active");
+          step.classList.remove("completed");
+        } else {
+          step.classList.remove("active", "completed");
+        }
+      }
+      
+      // Generate question HTML
+      let questionHTML = `
+        <div class="question">
+          <h4>Question ${currentQuestionIndex + 1}: ${question.question}</h4>
+          <div class="options">
+      `;
+      
+      question.options.forEach((option, index) => {
+        questionHTML += `
+          <div class="option" onclick="selectOption(${index})">${option}</div>
+        `;
+      });
+      
+      questionHTML += `
+          </div>
+        </div>
+      `;
+      
+      quizContent.innerHTML = questionHTML;
+      
+      // Update navigation buttons
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      
+      prevBtn.disabled = currentQuestionIndex === 0;
+      
+      if (currentQuestionIndex === currentQuestions.length - 1) {
+        nextBtn.textContent = "Finish";
+        nextBtn.className = "quiz-nav-btn finish";
+      } else {
+        nextBtn.textContent = "Next";
+        nextBtn.className = "quiz-nav-btn next";
+      }
+    }
+
+    function selectOption(optionIndex) {
+      // Store user answer
+      userAnswers[currentQuestionIndex] = optionIndex;
+      
+      // Update UI
+      const options = document.querySelectorAll(".option");
+      options.forEach((option, index) => {
+        if (index === optionIndex) {
+          option.classList.add("selected");
+        } else {
+          option.classList.remove("selected");
+        }
+      });
+    }
+
+    function previousQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
+        
+        // Restore previous answer if any
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+          const options = document.querySelectorAll(".option");
+          options[userAnswers[currentQuestionIndex]].classList.add("selected");
+        }
+      }
+    }
+
+    function nextQuestion() {
+      // Check if an answer is selected
+      if (userAnswers[currentQuestionIndex] === undefined) {
+        alert("Please select an answer before proceeding.");
+        return;
+      }
+      
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+        
+        // Restore previous answer if any
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+          const options = document.querySelectorAll(".option");
+          options[userAnswers[currentQuestionIndex]].classList.add("selected");
+        }
+      } else {
+        // Show results
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      // Hide quiz container
+      document.getElementById("quiz").classList.remove("active");
+      
+      // Calculate score
+      let correctCount = 0;
+      userAnswers.forEach((answer, index) => {
+        if (answer === currentQuestions[index].correct) {
+          correctCount++;
+        }
+      });
+      
+      // Update score display
+      document.getElementById("scoreCircle").textContent = `${correctCount}/${currentQuestions.length}`;
+      document.getElementById("correctCount").textContent = correctCount;
+      document.getElementById("incorrectCount").textContent = currentQuestions.length - correctCount;
+      
+      // Generate results for each question
+      const resultsQuestions = document.getElementById("resultsQuestions");
+      resultsQuestions.innerHTML = "";
+      
+      currentQuestions.forEach((question, index) => {
+        const userAnswer = userAnswers[index];
+        const isCorrect = userAnswer === question.correct;
+        
+        const resultHTML = `
+          <div class="result-question">
+            <h4>Question ${index + 1}: ${question.question}</h4>
+            <div class="user-answer ${isCorrect ? 'correct-answer' : 'wrong-answer'}">
+              Your answer: ${question.options[userAnswer]}
+            </div>
+            ${!isCorrect ? `
+              <div class="correct-answer">
+                Correct answer: ${question.options[question.correct]}
+              </div>
+            ` : ''}
+          </div>
+        `;
+        
+        resultsQuestions.innerHTML += resultHTML;
+      });
+      
+      // Show results container
+      document.getElementById("quizResults").classList.add("active");
+    }
+
+    function closeQuizResults() {
+      document.getElementById("quizResults").classList.remove("active");
+    }
+
+    // Search functionality - Clean implementation
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.querySelector('.search-box input');
+      
+      if (searchInput) {
+        searchInput.addEventListener('keyup', function(e) {
+          const searchTerm = e.target.value.toLowerCase().trim();
+          filterTopics(searchTerm);
+        });
+        
+        // Handle Enter key press
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            filterTopics(searchTerm);
+          }
+        });
+        
+        // Handle search icon click
+        const searchIcon = document.querySelector('.search-box i');
+        if (searchIcon) {
+          searchIcon.style.cursor = 'pointer';
+          searchIcon.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            filterTopics(searchTerm);
+          });
+        }
+      }
+    });
+
+    function filterTopics(searchTerm) {
+      // Remove any existing no-results messages
+      const existingNoResults = document.querySelectorAll('.no-results');
+      existingNoResults.forEach(el => el.remove());
+      
+      // If no search term, show all topics
+      if (searchTerm === '') {
+        const allTopics = document.querySelectorAll('.topic-item');
+        allTopics.forEach(topic => {
+          topic.style.display = 'block';
+        });
+        return;
+      }
+      
+      // Get all topic items from both tabs
+      const allTopics = document.querySelectorAll('.topic-item');
+      let hasResults = false;
+      
+      // Filter topics based on search term
+      allTopics.forEach(topic => {
+        const title = topic.querySelector('h3').textContent.toLowerCase();
+        const description = topic.querySelector('p').textContent.toLowerCase();
+        
+        // Check if search term matches title or description
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          topic.style.display = 'block';
+          hasResults = true;
+          
+          // If searching for a specific term, make sure the right tab is active
+          if (searchTerm === 'python' && title.includes('python')) {
+            // Switch to programming tab
+            const programmingTab = document.querySelector('.tab-btn:nth-child(2)');
+            const mathTab = document.querySelector('.tab-btn:nth-child(1)');
+            
+            if (programmingTab && mathTab) {
+              mathTab.classList.remove('active');
+              programmingTab.classList.add('active');
+              
+              // Show programming content, hide math content
+              document.getElementById('mathematics').classList.remove('active');
+              document.getElementById('programming').classList.add('active');
+            }
+          }
+        } else {
+          topic.style.display = 'none';
+        }
+      });
+      
+      // Show "no results" message if no topics found
+      if (!hasResults) {
+        const activeTabContent = document.querySelector('.tab-content.active .topics-content');
+        if (activeTabContent) {
+          const message = document.createElement('div');
+          message.className = 'no-results';
+          message.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #666;">
+              <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px; color: #ccc;"></i>
+              <h3>Search Results Not Found</h3>
+              <p>No topics found matching "${searchTerm}"</p>
+              <p style="margin-top: 10px; font-size: 14px;">Try searching with: python, java, algebra, calculus, etc.</p>
+            </div>
+          `;
+          activeTabContent.appendChild(message);
+        }
+      }
+    }
+
+    // Initialize modal close functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById("topicModal");
+      const span = document.getElementsByClassName("close")[0];
+
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
