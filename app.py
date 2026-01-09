@@ -99,9 +99,9 @@ def contact_handler():
     return render_template("contact.html")
 
 
-# @app.errorhandler(404)
-# def errorhandler(e):
-#     return redirect('/')
+@app.errorhandler(404)
+def errorhandler(e):
+    return redirect('/')
 
-
-app.run(host="0.0.0.0", port=6969, debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=6969, debug=True)
