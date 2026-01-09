@@ -726,14 +726,8 @@
 
   <!-- Authentication Script -->
   <script>
-    // Redirect to login page if not logged in
-    if (localStorage.getItem("loggedIn") !== "true") {
-      window.location.href = "login.html";
-    }
-
     function logoutUser() {
-      localStorage.removeItem("loggedIn");
-      window.location.href = "login.html";
+      window.location.href = "/logout";
     }
   </script>
 
@@ -745,11 +739,11 @@
         <h1>Edu<span>Globe</span></h1>
       </div>
       <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About Us</a>
-        <a href="topics.html">Topics</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="contact.html">Contact</a>
+        <a href="/">Home</a>
+        <a href="/about" class="active">About Us</a>
+        <a href="/topics">Topics</a>
+        <a href="/testimonials">Testimonials</a>
+        <a href="/contact">Contact</a>
       </nav>
       <div class="user-actions">
         <div class="search-box">
@@ -874,11 +868,11 @@
         <div class="footer-col">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="topics.html">Topics</a></li>
-            <li><a href="testimonials.html">Testimonials</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/topics">Topics</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
