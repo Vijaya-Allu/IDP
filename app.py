@@ -3,6 +3,7 @@ from flask import Flask, redirect, render_template, request, make_response
 from mongo_db import add_user, get_full_name, validate_password
 
 import uuid
+import os
 
 app = Flask(__name__)
 
@@ -103,5 +104,7 @@ def contact_handler():
 def errorhandler(e):
     return redirect('/')
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=6969, debug=True)
+    port = int(os.getenv("PORT", 6969))
+    app.run(host="0.0.0.0", port=port, debug=True)
