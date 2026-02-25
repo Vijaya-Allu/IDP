@@ -198,6 +198,20 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
+    .profile-btn {
+      background: transparent;
+      border: none;
+      color: #3949ab;
+      font-size: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-btn:hover {
+      color: #1a237e;
+      transform: scale(1.08);
+    }
+
     /* Hero Section */
     .hero {
       background: linear-gradient(135deg, #3949ab, #5c6bc0, #7986cb);
@@ -1186,6 +1200,17 @@
       box-shadow: 0 6px 15px rgba(67, 160, 71, 0.3);
     }
 
+    .btn-incomplete {
+      background: linear-gradient(135deg, #ef6c00, #fb8c00);
+      color: white;
+      box-shadow: 0 4px 10px rgba(239, 108, 0, 0.25);
+    }
+
+    .btn-incomplete:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(239, 108, 0, 0.35);
+    }
+
     .btn-close {
       background: #f5f7ff;
       color: #333;
@@ -1237,6 +1262,18 @@
     .quiz-option.selected {
       background: #3949ab;
       color: white;
+    }
+
+    .quiz-option.correct {
+      background: #2e7d32;
+      color: #fff;
+      border-color: #2e7d32;
+    }
+
+    .quiz-option.incorrect {
+      background: #c62828;
+      color: #fff;
+      border-color: #c62828;
     }
 
     .quiz-result {
@@ -1523,17 +1560,15 @@
       </div>
       <nav>
         <a href="/">Home</a>
-        <a href="/about">About Us</a>
         <a href="/topics" class="active">Topics</a>
         <a href="/testimonials">Testimonials</a>
+        <a href="/about">About Us</a>
         <a href="/contact">Contact</a>
       </nav>
       <div class="user-actions">
-        <div class="search-box">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search topics...">
-        </div>
-        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        <button class="profile-btn" onclick="window.location.href='/profile'" aria-label="Open Profile">
+          <i class="fas fa-user-circle"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -1542,7 +1577,7 @@
   <section class="hero">
     <div class="container">
       <h2>Explore Our Learning Topics</h2>
-      <p>Dive into our comprehensive collection of Mathematics and Programming topics</p>
+      <p>Dive into our comprehensive collection of Mathematics, Programming, English, Physics, and Chemistry topics</p>
     </div>
   </section>
 
@@ -1561,6 +1596,15 @@
           </button>
           <button class="tab-btn" onclick="openTab(event, 'programming')">
             <i class="fas fa-code"></i> Programming
+          </button>
+          <button class="tab-btn" onclick="openTab(event, 'english')">
+            <i class="fas fa-book-open"></i> English
+          </button>
+          <button class="tab-btn" onclick="openTab(event, 'physics')">
+            <i class="fas fa-atom"></i> Physics
+          </button>
+          <button class="tab-btn" onclick="openTab(event, 'chemistry')">
+            <i class="fas fa-flask"></i> Chemistry
           </button>
         </div>
         
@@ -1621,6 +1665,57 @@
             </div>
           </div>
         </div>
+
+        <div id="english" class="tab-content">
+          <div class="topics-content">
+            <div class="topic-item" id="eng1">
+              <i class="fas fa-spell-check"></i>
+              <h3>Grammar</h3>
+              <p>Sentence structure, tenses, and parts of speech</p>
+              <a href="#" onclick="showTopicDetails('eng1'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="eng2">
+              <i class="fas fa-pen-fancy"></i>
+              <h3>Writing Skills</h3>
+              <p>Paragraph writing, essays, and clarity in communication</p>
+              <a href="#" onclick="showTopicDetails('eng2'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div id="physics" class="tab-content">
+          <div class="topics-content">
+            <div class="topic-item" id="phys1">
+              <i class="fas fa-tachometer-alt"></i>
+              <h3>Mechanics</h3>
+              <p>Motion, forces, energy, and momentum</p>
+              <a href="#" onclick="showTopicDetails('phys1'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="phys2">
+              <i class="fas fa-bolt"></i>
+              <h3>Electricity & Magnetism</h3>
+              <p>Current, circuits, electric fields, and magnetic effects</p>
+              <a href="#" onclick="showTopicDetails('phys2'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div id="chemistry" class="tab-content">
+          <div class="topics-content">
+            <div class="topic-item" id="chem1">
+              <i class="fas fa-vial"></i>
+              <h3>Organic Chemistry</h3>
+              <p>Hydrocarbons, functional groups, and basic reactions</p>
+              <a href="#" onclick="showTopicDetails('chem1'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="topic-item" id="chem2">
+              <i class="fas fa-cubes"></i>
+              <h3>Inorganic Chemistry</h3>
+              <p>Periodic trends, bonding, and chemical compounds</p>
+              <a href="#" onclick="showTopicDetails('chem2'); return false;">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1645,7 +1740,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn-close" onclick="closeModal()">Close</button>
-        <button class="btn-complete" onclick="completeTopic(currentTopicId)">Mark as Completed</button>
+        <button id="completeToggleBtn" class="btn-complete" onclick="toggleTopicCompletion(currentTopicId)">Mark as Completed</button>
       </div>
     </div>
   </div>
@@ -3723,10 +3818,480 @@ CREATE TABLE enrollments (
             `
           }
         ]
+      },
+      eng1: {
+        title: "Grammar",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Grammar",
+            content: `
+              <h2>Grammar</h2>
+              <p>Grammar is the system of rules that helps us form clear and correct sentences in English.</p>
+              <ul>
+                <li><strong>Parts of speech</strong>: noun, pronoun, verb, adjective, adverb, preposition, conjunction, interjection</li>
+                <li><strong>Sentence structure</strong>: subject + verb + object</li>
+                <li><strong>Agreement rules</strong>: subject-verb and pronoun agreement</li>
+              </ul>
+            `
+          },
+          {
+            id: "tenses",
+            title: "Tenses and Usage",
+            content: `
+              <h2>Tenses and Usage</h2>
+              <p>Tenses show when an action happens.</p>
+              <ul>
+                <li><strong>Present</strong>: I write every day.</li>
+                <li><strong>Past</strong>: I wrote yesterday.</li>
+                <li><strong>Future</strong>: I will write tomorrow.</li>
+              </ul>
+              <div class="note">
+                <div class="note-title">Tip:</div>
+                <p>Focus on tense consistency inside a paragraph to avoid confusion.</p>
+              </div>
+            `
+          },
+          {
+            id: "practice",
+            title: "Practice Checklist",
+            content: `
+              <h2>Practice Checklist</h2>
+              <ol>
+                <li>Write 5 sentences in each tense.</li>
+                <li>Identify parts of speech in each sentence.</li>
+                <li>Correct one paragraph with grammar mistakes.</li>
+              </ol>
+            `
+          }
+        ]
+      },
+      eng2: {
+        title: "Writing Skills",
+        sections: [
+          {
+            id: "intro",
+            title: "Building Strong Writing",
+            content: `
+              <h2>Writing Skills</h2>
+              <p>Good writing is clear, organized, and audience-focused.</p>
+              <ul>
+                <li>Start with a clear topic sentence</li>
+                <li>Support with examples or evidence</li>
+                <li>End with a strong concluding sentence</li>
+              </ul>
+            `
+          },
+          {
+            id: "paragraph",
+            title: "Paragraph and Essay Structure",
+            content: `
+              <h2>Paragraph and Essay Structure</h2>
+              <p>Use the structure: introduction, body, and conclusion.</p>
+              <ul>
+                <li><strong>Introduction</strong>: hook + thesis</li>
+                <li><strong>Body</strong>: one main idea per paragraph</li>
+                <li><strong>Conclusion</strong>: summarize and restate significance</li>
+              </ul>
+            `
+          },
+          {
+            id: "editing",
+            title: "Editing and Revision",
+            content: `
+              <h2>Editing and Revision</h2>
+              <p>Revision improves clarity and quality.</p>
+              <ul>
+                <li>Remove repeated ideas</li>
+                <li>Replace weak verbs with precise verbs</li>
+                <li>Check punctuation and sentence length variety</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      phys1: {
+        title: "Mechanics",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Mechanics",
+            content: `
+              <h2>Mechanics</h2>
+              <p>Mechanics studies motion and the forces that cause motion.</p>
+              <ul>
+                <li><strong>Kinematics</strong>: displacement, velocity, acceleration</li>
+                <li><strong>Dynamics</strong>: force and Newton's laws</li>
+                <li><strong>Energy</strong>: kinetic and potential energy</li>
+              </ul>
+            `
+          },
+          {
+            id: "laws",
+            title: "Newton's Laws",
+            content: `
+              <h2>Newton's Laws</h2>
+              <ol>
+                <li>Objects remain at rest or in uniform motion unless acted on by a net force.</li>
+                <li><code>F = m a</code></li>
+                <li>Every action has an equal and opposite reaction.</li>
+              </ol>
+            `
+          },
+          {
+            id: "applications",
+            title: "Real-World Applications",
+            content: `
+              <h2>Real-World Applications</h2>
+              <ul>
+                <li>Vehicle safety and braking systems</li>
+                <li>Sports motion analysis</li>
+                <li>Machine and robotics design</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      phys2: {
+        title: "Electricity & Magnetism",
+        sections: [
+          {
+            id: "intro",
+            title: "Core Concepts",
+            content: `
+              <h2>Electricity and Magnetism</h2>
+              <p>This topic covers charge, current, voltage, resistance, and magnetic fields.</p>
+              <ul>
+                <li>Current is the flow of electric charge</li>
+                <li>Voltage is electric potential difference</li>
+                <li>Resistance opposes current flow</li>
+              </ul>
+            `
+          },
+          {
+            id: "circuits",
+            title: "Basic Circuit Laws",
+            content: `
+              <h2>Basic Circuit Laws</h2>
+              <ul>
+                <li><strong>Ohm's Law</strong>: <code>V = I R</code></li>
+                <li><strong>Power</strong>: <code>P = V I</code></li>
+                <li>Series and parallel resistor combinations</li>
+              </ul>
+            `
+          },
+          {
+            id: "uses",
+            title: "Applications",
+            content: `
+              <h2>Applications</h2>
+              <ul>
+                <li>Household electrical systems</li>
+                <li>Motors and generators</li>
+                <li>Telecommunication devices</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      chem1: {
+        title: "Organic Chemistry",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Organic Chemistry",
+            content: `
+              <h2>Organic Chemistry</h2>
+              <p>Organic chemistry is the study of carbon-containing compounds.</p>
+              <ul>
+                <li>Hydrocarbons: alkanes, alkenes, alkynes</li>
+                <li>Functional groups determine chemical behavior</li>
+                <li>Isomerism explains same formula, different structure</li>
+              </ul>
+            `
+          },
+          {
+            id: "groups",
+            title: "Functional Groups",
+            content: `
+              <h2>Functional Groups</h2>
+              <ul>
+                <li>Alcohols (<code>-OH</code>)</li>
+                <li>Carboxylic acids (<code>-COOH</code>)</li>
+                <li>Amines (<code>-NH2</code>)</li>
+                <li>Aldehydes and ketones</li>
+              </ul>
+            `
+          },
+          {
+            id: "reactions",
+            title: "Common Reactions",
+            content: `
+              <h2>Common Reactions</h2>
+              <ul>
+                <li>Substitution reactions</li>
+                <li>Addition reactions</li>
+                <li>Elimination reactions</li>
+              </ul>
+            `
+          }
+        ]
+      },
+      chem2: {
+        title: "Inorganic Chemistry",
+        sections: [
+          {
+            id: "intro",
+            title: "Introduction to Inorganic Chemistry",
+            content: `
+              <h2>Inorganic Chemistry</h2>
+              <p>Inorganic chemistry focuses on metals, minerals, salts, and non-carbon compounds.</p>
+              <ul>
+                <li>Periodic table trends</li>
+                <li>Ionic and covalent bonding</li>
+                <li>Acids, bases, and salts</li>
+              </ul>
+            `
+          },
+          {
+            id: "periodic",
+            title: "Periodic Properties",
+            content: `
+              <h2>Periodic Properties</h2>
+              <ul>
+                <li>Atomic radius generally decreases across a period</li>
+                <li>Ionization energy generally increases across a period</li>
+                <li>Electronegativity trends help predict bond type</li>
+              </ul>
+            `
+          },
+          {
+            id: "applications",
+            title: "Industrial Applications",
+            content: `
+              <h2>Industrial Applications</h2>
+              <ul>
+                <li>Fertilizer production</li>
+                <li>Metal extraction and purification</li>
+                <li>Ceramics and catalyst manufacturing</li>
+              </ul>
+            `
+          }
+        ]
       }
     };
 
+    const extraTopicSections = {
+      math1: {
+        id: "practice-plan",
+        title: "Practice Plan and Common Mistakes",
+        content: `
+          <h2>Practice Plan and Common Mistakes</h2>
+          <p>Use this short routine to build confidence in algebra:</p>
+          <ol>
+            <li>Solve 5 linear equations daily.</li>
+            <li>Factor at least 3 trinomials.</li>
+            <li>Check each step by substituting the answer back.</li>
+          </ol>
+          <h3>Common Mistakes</h3>
+          <ul>
+            <li>Forgetting to apply operations to both sides of an equation</li>
+            <li>Combining unlike terms incorrectly</li>
+            <li>Sign errors while expanding or simplifying</li>
+          </ul>
+        `
+      },
+      math2: {
+        id: "practice-plan",
+        title: "Geometry Problem Solving Strategy",
+        content: `
+          <h2>Geometry Problem Solving Strategy</h2>
+          <p>Follow this sequence for better accuracy:</p>
+          <ol>
+            <li>Draw a clean labeled figure.</li>
+            <li>Write known values and required values.</li>
+            <li>Pick the relevant theorem before calculating.</li>
+          </ol>
+          <h3>Quick Checklist</h3>
+          <ul>
+            <li>Angles in a triangle sum to 180 degrees</li>
+            <li>Units are consistent (cm, m, square units)</li>
+            <li>Final answer matches the asked quantity</li>
+          </ul>
+        `
+      },
+      math3: {
+        id: "practice-plan",
+        title: "Calculus Study Roadmap",
+        content: `
+          <h2>Calculus Study Roadmap</h2>
+          <p>To improve in calculus, practice in this order:</p>
+          <ol>
+            <li>Master derivative rules with 10 examples.</li>
+            <li>Practice definite and indefinite integrals.</li>
+            <li>Solve optimization and area-under-curve problems.</li>
+          </ol>
+          <h3>Exam Tips</h3>
+          <ul>
+            <li>Write the rule used (power, chain, product)</li>
+            <li>Simplify before differentiating or integrating where possible</li>
+            <li>Always add constant C for indefinite integrals</li>
+          </ul>
+        `
+      },
+      math4: {
+        id: "practice-plan",
+        title: "Interpreting Data Correctly",
+        content: `
+          <h2>Interpreting Data Correctly</h2>
+          <p>Statistics is not only calculation. It is interpretation:</p>
+          <ul>
+            <li>Use mean for symmetric data without outliers</li>
+            <li>Use median for skewed data or outliers</li>
+            <li>Report spread using standard deviation or IQR</li>
+          </ul>
+          <h3>Mini Practice</h3>
+          <p>Pick a 10-value dataset and compute mean, median, mode, range, and standard deviation. Then explain what each value tells you.</p>
+        `
+      },
+      prog1: {
+        id: "best-practices",
+        title: "Python Best Practices",
+        content: `
+          <h2>Python Best Practices</h2>
+          <ul>
+            <li>Use clear variable names like <code>student_count</code> instead of <code>x</code></li>
+            <li>Keep functions small and focused on one task</li>
+            <li>Write docstrings for reusable functions</li>
+            <li>Use virtual environments for project dependencies</li>
+          </ul>
+          <h3>Next Exercise</h3>
+          <p>Create a function that takes a list of numbers and returns the minimum, maximum, and average.</p>
+        `
+      },
+      prog2: {
+        id: "best-practices",
+        title: "Java Coding Guidelines",
+        content: `
+          <h2>Java Coding Guidelines</h2>
+          <ul>
+            <li>Use <code>CamelCase</code> for classes and <code>camelCase</code> for methods</li>
+            <li>Prefer interfaces for flexible design</li>
+            <li>Use access modifiers to enforce encapsulation</li>
+            <li>Handle exceptions with meaningful messages</li>
+          </ul>
+          <h3>Next Exercise</h3>
+          <p>Build a <code>Student</code> class with fields, constructor, getters, and a method to print profile details.</p>
+        `
+      },
+      prog3: {
+        id: "project-ideas",
+        title: "Web Project Ideas",
+        content: `
+          <h2>Web Project Ideas</h2>
+          <p>Practice by building small projects:</p>
+          <ul>
+            <li>Responsive portfolio page with HTML and CSS</li>
+            <li>To-do app using JavaScript local storage</li>
+            <li>Weather dashboard using a public API</li>
+          </ul>
+          <h3>Quality Checklist</h3>
+          <ul>
+            <li>Mobile responsive layout</li>
+            <li>Accessible form labels and button text</li>
+            <li>Basic input validation and error states</li>
+          </ul>
+        `
+      },
+      prog4: {
+        id: "database-practice",
+        title: "Database Query Practice",
+        content: `
+          <h2>Database Query Practice</h2>
+          <p>Strengthen SQL by practicing these patterns:</p>
+          <ul>
+            <li><code>SELECT</code> with <code>WHERE</code>, <code>ORDER BY</code>, and <code>LIMIT</code></li>
+            <li><code>JOIN</code> across two and three tables</li>
+            <li><code>GROUP BY</code> with aggregate functions</li>
+          </ul>
+          <h3>Mini Challenge</h3>
+          <p>Write a query to list each course and total enrolled students, sorted by highest enrollment.</p>
+        `
+      }
+    };
+
+    Object.entries(extraTopicSections).forEach(([topicId, section]) => {
+      const topic = topicDetails[topicId];
+      if (!topic || !Array.isArray(topic.sections)) return;
+      if (topic.sections.some(existing => existing.id === section.id)) return;
+
+      const quizIndex = topic.sections.findIndex(item => item.id === "quiz");
+      if (quizIndex === -1) {
+        topic.sections.push(section);
+      } else {
+        topic.sections.splice(quizIndex, 0, section);
+      }
+    });
+
     let currentTopicId = null;
+    let completedTopics = new Set();
+
+    function setTopicCompletionInUI(topicId, isCompleted) {
+      const topicCard = document.getElementById(topicId);
+      if (!topicCard) return;
+
+      topicCard.classList.toggle("completed", isCompleted);
+      if (isCompleted) {
+        completedTopics.add(topicId);
+      } else {
+        completedTopics.delete(topicId);
+      }
+    }
+
+    function applyCompletedTopicsUI() {
+      const topicCards = document.querySelectorAll(".topic-item");
+      topicCards.forEach(card => {
+        const isCompleted = completedTopics.has(card.id);
+        card.classList.toggle("completed", isCompleted);
+      });
+      if (currentTopicId) {
+        updateCompleteButton(currentTopicId);
+      }
+    }
+
+    async function loadTopicProgress() {
+      try {
+        const response = await fetch("/api/topics/progress");
+        if (!response.ok) {
+          return;
+        }
+        const data = await response.json();
+        const completed = Array.isArray(data.completed_topics) ? data.completed_topics : [];
+        completedTopics = new Set(completed);
+        applyCompletedTopicsUI();
+      } catch (error) {
+        console.error("Failed to load topic progress:", error);
+      }
+    }
+
+    async function saveTopicProgress(topicId, completed) {
+      try {
+        const response = await fetch("/api/topics/progress", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            topic_id: topicId,
+            completed
+          })
+        });
+        return response.ok;
+      } catch (error) {
+        console.error("Failed to save topic progress:", error);
+        return false;
+      }
+    }
 
     // Tab functionality
     function openTab(evt, tabName) {
@@ -3793,6 +4358,8 @@ CREATE TABLE enrollments (
         if (typeof Prism !== 'undefined') {
           Prism.highlightAll();
         }
+
+        updateCompleteButton(topicId);
       }
     }
 
@@ -3913,6 +4480,17 @@ CREATE TABLE enrollments (
     }
 
     // Select quiz option
+    const topicQuizAnswerKey = {
+      math1: [1, 0, 2],
+      math2: [1, 0, 1],
+      math3: [0, 0, 0],
+      math4: [1, 1, 2],
+      prog1: [0, 2],
+      prog2: [1, 0],
+      prog3: [1, 1],
+      prog4: [1, 2]
+    };
+
     function selectQuizOption(element, questionIndex, optionIndex) {
       const options = element.parentElement.querySelectorAll('.quiz-option');
       options.forEach(opt => {
@@ -3920,25 +4498,63 @@ CREATE TABLE enrollments (
       });
       element.classList.add('selected');
       
-      // Show result
+      // Show result based on the selected answer for the active topic.
       const resultDiv = document.getElementById(`quiz-result-${questionIndex}`);
+      const answerKey = topicQuizAnswerKey[currentTopicId] || [];
+      const correctOptionIndex = answerKey[questionIndex];
+
+      if (!resultDiv.dataset.correctHtml) {
+        resultDiv.dataset.correctHtml = resultDiv.innerHTML;
+      }
+
+      if (optionIndex === correctOptionIndex) {
+        resultDiv.classList.remove('incorrect');
+        resultDiv.classList.add('correct');
+        resultDiv.innerHTML = resultDiv.dataset.correctHtml;
+      } else {
+        const correctText = options[correctOptionIndex] ? options[correctOptionIndex].textContent.trim() : '';
+        resultDiv.classList.remove('correct');
+        resultDiv.classList.add('incorrect');
+        resultDiv.innerHTML = `<strong>Incorrect.</strong> Correct answer: ${correctText}`;
+      }
+
       resultDiv.style.display = 'block';
     }
 
-    // Complete topic and show quiz
-    function completeTopic(topicId) {
+    function updateCompleteButton(topicId) {
+      const button = document.getElementById("completeToggleBtn");
       const topicCard = document.getElementById(topicId);
-      
-      // Mark topic as completed
-      topicCard.classList.add("completed");
-      
-      // Close modal
-      closeModal();
-      
-      // Show quiz after a short delay
-      setTimeout(() => {
-        generateQuiz();
-      }, 500);
+      if (!button || !topicCard) return;
+
+      const isCompleted = topicCard.classList.contains("completed");
+      if (isCompleted) {
+        button.textContent = "Mark as Incomplete";
+        button.classList.remove("btn-complete");
+        button.classList.add("btn-incomplete");
+      } else {
+        button.textContent = "Mark as Completed";
+        button.classList.remove("btn-incomplete");
+        button.classList.add("btn-complete");
+      }
+    }
+
+    // Toggle topic completion state
+    async function toggleTopicCompletion(topicId) {
+      const topicCard = document.getElementById(topicId);
+      if (!topicCard) return;
+
+      const wasCompleted = topicCard.classList.contains("completed");
+      const nextCompleted = !wasCompleted;
+
+      setTopicCompletionInUI(topicId, nextCompleted);
+      updateCompleteButton(topicId);
+
+      const saved = await saveTopicProgress(topicId, nextCompleted);
+      if (!saved) {
+        setTopicCompletionInUI(topicId, wasCompleted);
+        updateCompleteButton(topicId);
+        alert("Could not save progress. Please try again.");
+      }
     }
 
     // Calculator functionality
@@ -4203,6 +4819,7 @@ CREATE TABLE enrollments (
 
     // Search functionality - Clean implementation
     document.addEventListener('DOMContentLoaded', function() {
+      loadTopicProgress();
       const searchInput = document.querySelector('.search-box input');
       
       if (searchInput) {
@@ -4248,6 +4865,7 @@ CREATE TABLE enrollments (
       // Get all topic items from both tabs
       const allTopics = document.querySelectorAll('.topic-item');
       let hasResults = false;
+      let firstMatchedTabId = null;
       
       // Filter topics based on search term
       allTopics.forEach(topic => {
@@ -4258,26 +4876,32 @@ CREATE TABLE enrollments (
         if (title.includes(searchTerm) || description.includes(searchTerm)) {
           topic.style.display = 'block';
           hasResults = true;
-          
-          // If searching for a specific term, make sure the right tab is active
-          if (searchTerm === 'python' && title.includes('python')) {
-            // Switch to programming tab
-            const programmingTab = document.querySelector('.tab-btn:nth-child(2)');
-            const mathTab = document.querySelector('.tab-btn:nth-child(1)');
-            
-            if (programmingTab && mathTab) {
-              mathTab.classList.remove('active');
-              programmingTab.classList.add('active');
-              
-              // Show programming content, hide math content
-              document.getElementById('mathematics').classList.remove('active');
-              document.getElementById('programming').classList.add('active');
+          if (!firstMatchedTabId) {
+            const parentTab = topic.closest('.tab-content');
+            if (parentTab) {
+              firstMatchedTabId = parentTab.id;
             }
           }
         } else {
           topic.style.display = 'none';
         }
       });
+
+      // Switch to first tab that contains a match.
+      if (hasResults && firstMatchedTabId) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(firstMatchedTabId).classList.add('active');
+
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabButtons.forEach(btn => {
+          const onclickValue = btn.getAttribute('onclick') || '';
+          if (onclickValue.includes(`'${firstMatchedTabId}'`)) {
+            btn.classList.add('active');
+          }
+        });
+      }
       
       // Show "no results" message if no topics found
       if (!hasResults) {
@@ -4290,7 +4914,7 @@ CREATE TABLE enrollments (
               <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px; color: #ccc;"></i>
               <h3>Search Results Not Found</h3>
               <p>No topics found matching "${searchTerm}"</p>
-              <p style="margin-top: 10px; font-size: 14px;">Try searching with: python, java, algebra, calculus, etc.</p>
+              <p style="margin-top: 10px; font-size: 14px;">Try searching with: python, grammar, mechanics, organic, algebra, etc.</p>
             </div>
           `;
           activeTabContent.appendChild(message);
@@ -4313,6 +4937,7 @@ CREATE TABLE enrollments (
         }
       }
     });
+
   </script>
 </body>
 </html>

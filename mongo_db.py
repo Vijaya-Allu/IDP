@@ -25,3 +25,26 @@ def validate_password(email: str, password: str) -> bool:
         if x['password'] == password:
             return True
     return False
+
+
+def get_completed_topics(email: str) -> list[str]:
+    x = users.find_one({'email': email}, {'_id': 0, 'completed_topics': 1})
+    if not x:
+        return []
+    completed_topics = x.get('completed_topics', [])
+    if isinstance(completed_topics, list):
+        return completed_topics
+    return []
+
+
+def set_topic_completion(email: str, topic_id: str, completed: bool) -> None:
+    if completed:
+        users.update_one(
+            {'email': email},
+            {'$addToSet': {'completed_topics': topic_id}}
+        )
+    else:
+        users.update_one(
+            {'email': email},
+            {'$pull': {'completed_topics': topic_id}}
+        )
